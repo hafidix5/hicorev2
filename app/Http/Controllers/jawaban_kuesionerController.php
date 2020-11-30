@@ -276,8 +276,8 @@ AND jk.jawaban=k.kunci AND k.id>=51 AND k.id<=60 limit 1
         $obesitas=DB::select('
         SELECT (case when  lingkar_perut>90 AND jk="laki-laki" then "Obesitas Sentral"
             when  lingkar_perut>80 AND jk="perempuan" then "Obesitas Sentral"
-            when lingkar_perut<90 AND jk="laki-laki" then "Normal"
-            when lingkar_perut<80 AND jk="perempuan" then "Normal"
+            when lingkar_perut<=90 AND jk="laki-laki" then "Normal"
+            when lingkar_perut<=80 AND jk="perempuan" then "Normal"
 			END)  AS obesitas FROM pasien WHERE id='.$id.'
         ');
 

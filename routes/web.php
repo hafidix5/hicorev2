@@ -46,6 +46,9 @@ Route::group(['middleware' => 'auth'], function () {
     Route::get('/riwayat/downloadHasilKuesioner/{id}','KuesionerController@export_excel')->name('downloadHasilKuesioner');
     Route::post('isi_kuesionerSave', 'jawaban_kuesionerController@store')->name('isi_kuesionerSave');
     Route::post('status_kesehatan.store', 'status_kesehatanController@store')->name('status_kesehatan.store');
+    Route::get('status_kesehatan.create', 'status_kesehatanController@create')->name('status_kesehatan.create');
+    Route::get('status_kesehatan.show/{id}', 'status_kesehatanController@show')->name('status_kesehatan.show');
+    Route::get('status_kesehatan.hasil/{tgl}/{id}', 'status_kesehatanController@hasil')->name('status_kesehatan.hasil');
     Route::get('riwayatdetail/{tanggal}/DetailKuesioner/{id}', 'jawaban_kuesionerController@detail')->name('riwayatDetailKuesioner');
     Route::get('pendidikanKesehatan', 'edukasi_videoController@index')->name('pendidikanKesehatan');
         //Route::resource('isi_kuesioner', 'KuesionerController');
