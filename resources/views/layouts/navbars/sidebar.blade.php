@@ -32,7 +32,7 @@
                     </a>
                 <ul class="collapse list-unstyled" id="pengetahuan">
                     <li class="nav-link">
-                        <a  href="{{ route('dataDiri') }}">Isi kuesioner</a>
+                        <a  href="{{ route('isi_pengetahuan') }}">Isi kuesioner</a>
                     </li>
                     <li class="nav-link">
                       <a  href="{{ route('dataDiri') }}">Hasil kuesioner</a>
@@ -46,7 +46,7 @@
                     </a>
                 <ul class="collapse list-unstyled" id="persepsi">
                     <li class="nav-link">
-                        <a  href="{{ route('dataDiri') }}">Isi kuesioner</a>
+                        <a  href="{{ route('isi_persepsi') }}">Isi kuesioner</a>
                     </li>
                     <li class="nav-link">
                       <a  href="{{ route('dataDiri') }}">Hasil kuesioner</a>
@@ -60,7 +60,7 @@
                     </a>
                 <ul class="collapse list-unstyled" id="stress">
                     <li class="nav-link">
-                        <a  href="{{ route('dataDiri') }}">Isi kuesioner</a>
+                        <a  href="{{ route('isi_stress') }}">Isi kuesioner</a>
                     </li>
                     <li class="nav-link">
                       <a  href="{{ route('dataDiri') }}">Hasil kuesioner</a>
@@ -89,7 +89,7 @@
                     </a>
                 <ul class="collapse list-unstyled" id="hipertensi">
                     <li class="nav-link">
-                        <a  href="{{ route('dataDiri') }}">Isi kuesioner</a>
+                        <a  href="{{ route('isi_pengendalian') }}">Isi kuesioner</a>
                     </li>
                     <li class="nav-link">
                       <a  href="{{ route('dataDiri') }}">Hasil kuesioner</a>

@@ -43,30 +43,41 @@ class jawaban_kuesionerController extends Controller
      */
     public function store(Request $request)
     {
+        $id=auth()->user()->id;
+        $pasien=DB::table('pasien')->where('user_id',$id)->first();
         $date=Carbon::now();
         $date=$date->toDateString();
-        $no='1';
+        $i=0;
         $data=$request->except(['_token', '_method']);
-        $cek = jawaban_kuesioner::where('tanggal',$date)->first();
+        $key=array_keys($data);
+
+
+        $cek = jawaban_kuesioner::where('tanggal',$date)
+        ->where('pasien_id',$pasien->id)->where('jenis_id',2)->first();
+
+       // dd($total2);
         if($cek)
         {
           //  return back()->withStatus(__('Kuesioner hanya bisa diisi Satu kali per hari'));
-           return redirect()->back()->with('error','Kuesioner hanya bisa diisi Satu kali per hari');
+          // return redirect()->back()->with('error','Kuesioner hanya bisa diisi Satu kali per hari');
+           return back()->withStatus(__('Kuesioner hanya bisa diisi Satu kali per hari'));
         }
         else
         {
         if(count($data)<3) {
             return back()->withStatus(__('jawaban Kuesioner harus diisi semua'));
         } else {
-            foreach($data as $input){
+            foreach($data as $data){
+                //dd(array_keys($data)->value());
 
                 DB::table('jawaban_kuesioner')->insert([
                   'tanggal'=>$date,
-                  'kuesioner_id'=>$no,
-                  'pasien_id'=>auth()->user()->id,
-                  'jawaban'=>$input
+                  'kuesioner_id'=>$key[$i],
+                  'pasien_id'=>$pasien->id,
+                  'jenis_id'=>2,
+                  'jawaban'=>$data
                 ]);
-                $no++;
+                $i++;
             }
             return back()->withStatus(__('jawaban Kuesioner berhasil disimpan'));
         }
@@ -76,6 +87,147 @@ class jawaban_kuesionerController extends Controller
         //dd(count($data));
        // return back()->withStatus(__('jawaban Kuesioner berhasil disimpan'));
     }
+    public function storepengetahuan(Request $request)
+    {
+        $id=auth()->user()->id;
+        $pasien=DB::table('pasien')->where('user_id',$id)->first();
+        $date=Carbon::now();
+        $date=$date->toDateString();
+        $i=0;
+        $data=$request->except(['_token', '_method']);
+        $key=array_keys($data);
+
+
+        $cek = jawaban_kuesioner::where('tanggal',$date)
+        ->where('pasien_id',$pasien->id)->where('jenis_id',1)->first();
+
+       // dd($total2);
+        if($cek)
+        {
+          //  return back()->withStatus(__('Kuesioner hanya bisa diisi Satu kali per hari'));
+          // return redirect()->back()->with('error','Kuesioner hanya bisa diisi Satu kali per hari');
+           return back()->withStatus(__('Kuesioner hanya bisa diisi Satu kali per hari'));
+        }
+        else
+        {
+        if(count($data)<3) {
+            return back()->withStatus(__('jawaban Kuesioner harus diisi semua'));
+        } else {
+            foreach($data as $data){
+                //dd(array_keys($data)->value());
+
+                DB::table('jawaban_kuesioner')->insert([
+                  'tanggal'=>$date,
+                  'kuesioner_id'=>$key[$i],
+                  'pasien_id'=>$pasien->id,
+                  'jenis_id'=>1,
+                  'jawaban'=>$data
+                ]);
+                $i++;
+            }
+            return back()->withStatus(__('jawaban Kuesioner berhasil disimpan'));
+        }
+        }
+
+
+        //dd(count($data));
+       // return back()->withStatus(__('jawaban Kuesioner berhasil disimpan'));
+    }
+    public function storestress(Request $request)
+    {
+        $id=auth()->user()->id;
+        $pasien=DB::table('pasien')->where('user_id',$id)->first();
+        $date=Carbon::now();
+        $date=$date->toDateString();
+        $i=0;
+        $data=$request->except(['_token', '_method']);
+        $key=array_keys($data);
+
+
+        $cek = jawaban_kuesioner::where('tanggal',$date)
+        ->where('pasien_id',$pasien->id)->where('jenis_id',3)->first();
+
+       // dd($total2);
+        if($cek)
+        {
+          //  return back()->withStatus(__('Kuesioner hanya bisa diisi Satu kali per hari'));
+          // return redirect()->back()->with('error','Kuesioner hanya bisa diisi Satu kali per hari');
+           return back()->withStatus(__('Kuesioner hanya bisa diisi Satu kali per hari'));
+        }
+        else
+        {
+        if(count($data)<3) {
+            return back()->withStatus(__('jawaban Kuesioner harus diisi semua'));
+        } else {
+            foreach($data as $data){
+                //dd(array_keys($data)->value());
+
+                DB::table('jawaban_kuesioner')->insert([
+                  'tanggal'=>$date,
+                  'kuesioner_id'=>$key[$i],
+                  'pasien_id'=>$pasien->id,
+                  'jenis_id'=>3,
+                  'jawaban'=>$data
+                ]);
+                $i++;
+            }
+            return back()->withStatus(__('jawaban Kuesioner berhasil disimpan'));
+        }
+        }
+
+
+        //dd(count($data));
+       // return back()->withStatus(__('jawaban Kuesioner berhasil disimpan'));
+    }
+
+    public function storepengendalian(Request $request)
+    {
+        $id=auth()->user()->id;
+        $pasien=DB::table('pasien')->where('user_id',$id)->first();
+        $date=Carbon::now();
+        $date=$date->toDateString();
+        $i=0;
+        $data=$request->except(['_token', '_method']);
+        $key=array_keys($data);
+
+
+        $cek = jawaban_kuesioner::where('tanggal',$date)
+        ->where('pasien_id',$pasien->id)->where('jenis_id',4)->first();
+
+       // dd($total2);
+        if($cek)
+        {
+          //  return back()->withStatus(__('Kuesioner hanya bisa diisi Satu kali per hari'));
+          // return redirect()->back()->with('error','Kuesioner hanya bisa diisi Satu kali per hari');
+           return back()->withStatus(__('Kuesioner hanya bisa diisi Satu kali per hari'));
+        }
+        else
+        {
+        if(count($data)<3) {
+            return back()->withStatus(__('jawaban Kuesioner harus diisi semua'));
+        } else {
+            foreach($data as $data){
+                //dd(array_keys($data)->value());
+
+                DB::table('jawaban_kuesioner')->insert([
+                  'tanggal'=>$date,
+                  'kuesioner_id'=>$key[$i],
+                  'pasien_id'=>$pasien->id,
+                  'jenis_id'=>4,
+                  'jawaban'=>$data
+                ]);
+                $i++;
+            }
+            return back()->withStatus(__('jawaban Kuesioner berhasil disimpan'));
+        }
+        }
+
+
+        //dd(count($data));
+       // return back()->withStatus(__('jawaban Kuesioner berhasil disimpan'));
+    }
+
+
 
         /**
      * Display the specified resource.

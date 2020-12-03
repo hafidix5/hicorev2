@@ -9,7 +9,7 @@ class jawaban_kuesioner extends Model
     protected $table='jawaban_kuesioner';
 
     protected $fillable = [
-        'tanggal','kuesioner_id','pasien_id','jawaban'
+        'tanggal','kuesioner_id','pasien_id','jawaban','jenis_id'
     ];
     protected $dateFormat = 'U';
 

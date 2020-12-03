@@ -41,10 +41,17 @@ Route::group(['middleware' => 'auth'], function () {
     Route::get('table-list', 'jawaban_kuesionerController@riwayat')->name('table');
     Route::get('riwayat', 'jawaban_kuesionerController@riwayatpribadi')->name('riwayat');
 
-    Route::get('isi_kuesioner', 'KuesionerController@index')->name('typography');
+    Route::get('isi_persepsi', 'KuesionerController@index')->name('isi_persepsi');
+    Route::get('isi_pengetahuan', 'KuesionerController@indexpengetahuan')->name('isi_pengetahuan');
+    Route::get('isi_stress', 'KuesionerController@indexstress')->name('isi_stress');
+    Route::get('isi_pengendalian', 'KuesionerController@indexpengendalian')->name('isi_pengendalian');
     Route::get('status_kesehatan', 'status_kesehatanController@index')->name('status_kesehatan');
     Route::get('/riwayat/downloadHasilKuesioner/{id}','KuesionerController@export_excel')->name('downloadHasilKuesioner');
-    Route::post('isi_kuesionerSave', 'jawaban_kuesionerController@store')->name('isi_kuesionerSave');
+    Route::post('isi_persepsiSave', 'jawaban_kuesionerController@store')->name('isi_persepsiSave');
+    Route::post('isi_pengetahuanSave', 'jawaban_kuesionerController@storepengetahuan')->name('isi_pengetahuanSave');
+    Route::post('isi_stressSave', 'jawaban_kuesionerController@storestress')->name('isi_stressSave');
+    Route::post('isi_pengendalianSave', 'jawaban_kuesionerController@storepengendalian')->name('isi_pengendalianSave');
+
     Route::post('status_kesehatan.store', 'status_kesehatanController@store')->name('status_kesehatan.store');
     Route::get('status_kesehatan.create', 'status_kesehatanController@create')->name('status_kesehatan.create');
     Route::get('status_kesehatan.show/{id}', 'status_kesehatanController@show')->name('status_kesehatan.show');

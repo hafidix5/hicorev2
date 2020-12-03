@@ -21,25 +21,67 @@ class KuesionerController extends Controller
 
          if(pasien::where('user_id','=',auth()->user()->id)->first())
         {
-        $kuesioner   = kuesioner::all();
+        $persepsi=DB::table('kuesioner')->where('jenis_id','2')->get();
 
-        $kuesionerOren= $kuesioner->whereBetween('id',['1','22']);
-        $kuesionerKuning= $kuesioner->whereBetween('id',['23','50']);
-        $kuesionerHijau= $kuesioner->whereBetween('id',['51','60']);
-        $kuesionerBiruMObat= $kuesioner->whereBetween('id',['61','63']);
-        $kuesionerBiruMDiet= $kuesioner->whereBetween('id',['64','75']);
-        $kuesionerBiruMFisik= $kuesioner->whereBetween('id',['76','77']);
-        $kuesionerBiruMRokok= $kuesioner->whereBetween('id',['78','79']);
-        $kuesionerNavyBB= $kuesioner->whereBetween('id',['80','89']);
-        $kuesionerNavyAlkohol= $kuesioner->whereBetween('id',['90','90']);
-        $kuesionerNavyAlkoholbotol= $kuesioner->whereBetween('id',['91','91']);
-        $kuesionerNavyAlkoholtotal= $kuesioner->whereBetween('id',['92','92']);
-        $kuesionerNavyAlkoholmerek= $kuesioner->whereBetween('id',['93','93']);
-        $kuesionerBiru= $kuesioner->whereBetween('id',['94','107']);
-         return view('pages.typography', compact('kuesionerOren','kuesionerKuning',
-    'kuesionerHijau','kuesionerBiruMObat','kuesionerBiruMDiet','kuesionerBiruMFisik',
-    'kuesionerBiruMRokok','kuesionerNavyBB','kuesionerNavyAlkohol',
-    'kuesionerNavyAlkoholbotol','kuesionerNavyAlkoholtotal','kuesionerNavyAlkoholmerek','kuesionerBiru'));
+         return view('pages.isi_persepsi', compact('persepsi'));
+        }
+        else
+        {
+
+            return redirect()->route('dataDiri')->withStatus(__('Anda harus mengisi Data Diri terlebih dahulu'));
+        }
+
+        //dd(pasien::where('user_id','=',auth()->user()->id)->first());
+    }
+    public function indexpengetahuan()
+    {
+
+         if(pasien::where('user_id','=',auth()->user()->id)->first())
+        {
+        $pengetahuan=DB::table('kuesioner')->where('jenis_id','1')->get();
+
+         return view('pages.isi_pengetahuan', compact('pengetahuan'));
+        }
+        else
+        {
+
+            return redirect()->route('dataDiri')->withStatus(__('Anda harus mengisi Data Diri terlebih dahulu'));
+        }
+
+        //dd(pasien::where('user_id','=',auth()->user()->id)->first());
+    }
+    public function indexstress()
+    {
+
+         if(pasien::where('user_id','=',auth()->user()->id)->first())
+        {
+        $stress=DB::table('kuesioner')->where('jenis_id','3')->get();
+
+         return view('pages.isi_stress', compact('stress'));
+        }
+        else
+        {
+
+            return redirect()->route('dataDiri')->withStatus(__('Anda harus mengisi Data Diri terlebih dahulu'));
+        }
+
+        //dd(pasien::where('user_id','=',auth()->user()->id)->first());
+    }
+    public function indexpengendalian()
+    {
+
+         if(pasien::where('user_id','=',auth()->user()->id)->first())
+        {
+        $pengendalian_1=DB::table('kuesioner')->where('jenis_id','4')->where('sub_jenis','obat-obatan')->get();
+        $pengendalian_2=DB::table('kuesioner')->where('jenis_id','4')->where('sub_jenis','diet')->get();
+        $pengendalian_3=DB::table('kuesioner')->where('jenis_id','4')->where('sub_jenis','aktivitas_fisik')->get();
+        $pengendalian_4=DB::table('kuesioner')->where('jenis_id','4')->where('sub_jenis','merokok')->get();
+        $pengendalian_5=DB::table('kuesioner')->where('jenis_id','4')->where('sub_jenis','manajemen_bb')->get();
+        $pengendalian_6=DB::table('kuesioner')->where('jenis_id','4')->where('sub_jenis','minum_alkohol')->get();
+        $pengendalian_7=DB::table('kuesioner')->where('jenis_id','4')->where('sub_jenis','alkohol')->get();
+
+         return view('pages.isi_pengendalian', compact('pengendalian_1','pengendalian_2',
+         'pengendalian_3','pengendalian_4','pengendalian_5','pengendalian_6','pengendalian_7'));
         }
         else
         {

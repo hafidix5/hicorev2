@@ -1,14 +1,14 @@
-@extends('layouts.app', ['activePage' => 'Isi kuesioner', 'titlePage' => __('Isi kuesioner')])
+@extends('layouts.app', ['activePage' => '', 'titlePage' => __('')])
 
 @section('content')
 <div class="content">
   <div class="container-fluid">
     <div class="card">
       <div class="card-header card-header-primary">
-        <h4 class="card-title">Pengendalian Hipertensi</h4>
+        <h4 class="card-title">Isi kuesioner Stres Pasien Hipertensi</h4>
       </div>
 
-      <div class="card-body">
+      <div class="card-body col-sm-10">
         <iframe src="{{ asset('material') }}/img/silence.mp3" type="audio/mp3" allow="autoplay" id="audio" style="display: none"></iframe>
         <audio id="player" autoplay loop>
           <source src="{{ asset('material') }}/img/hicore.mp3" type="audio/mp3">
@@ -40,23 +40,25 @@
 
             </thead>
             <tbody>
-                <form method="post" action="{{ route('isi_kuesionerSave') }}" autocomplete="off" class="form-horizontal">
+                <form method="post" action="{{ route('isi_stressSave') }}" autocomplete="off" class="form-horizontal">
                     @csrf
                     @method('post')
-
-            @foreach ($kuesionerOren as $kuesionerOren)
+            <?php $no=1; ?>
+            @foreach ($stress as $stress)
                 <tr>
-                    <td>{{ $kuesionerOren->id }}</td>
-                    <td>{{ $kuesionerOren->pertanyaan }}</td>
+                    <td>{{ $no++ }}</td>
+                    <td>{{ $stress->pertanyaan }}</td>
                     <td class="text-left">
-                        <span><input type="radio" id={{ $kuesionerOren->id }} name={{ 'pertanyaan'.$kuesionerOren->id }} value="1" required/> Benar</span><br>
-                        <span><input type="radio" id={{ $kuesionerOren->id }} name={{ 'pertanyaan'.$kuesionerOren->id }} value="0"/> Salah</span><br/>
-                       <span><input type="radio" id={{ $kuesionerOren->id }} name={{ 'pertanyaan'.$kuesionerOren->id }} value="0"/> Tidak Tahu</span>
+                        <span><input type="radio" id={{ $stress->id }} name={{ $stress->id }} value="0" required/> Tidak Pernah</span><br>
+                        <span><input type="radio" id={{ $stress->id }} name={{ $stress->id }} value="1"/> Jarang</span><br/>
+                       <span><input type="radio" id={{ $stress->id }} name={{ $stress->id }} value="2"/> Kadang-kadang</span>
+                       <span><input type="radio" id={{ $stress->id }} name={{ $stress->id }} value="3"/> Sering</span><br/>
+                       <span><input type="radio" id={{ $stress->id }} name={{ $stress->id }} value="4"/> Sangat Sering</span>
                    </div>
                     </td>
                 </tr>
             @endforeach
-            @foreach ($kuesionerKuning as $kuesionerKuning)
+           {{--  @foreach ($kuesionerKuning as $kuesionerKuning)
                 <tr>
                     <td>{{ $kuesionerKuning->id }}</td>
                     <td>{{ $kuesionerKuning->pertanyaan }}</td>
@@ -236,7 +238,7 @@
                </div>
                 </td>
             </tr>
-            @endforeach
+            @endforeach --}}
 
             </tbody>
           </table>
