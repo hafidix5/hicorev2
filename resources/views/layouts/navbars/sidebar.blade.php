@@ -35,7 +35,7 @@
                         <a  href="{{ route('isi_pengetahuan') }}">Isi kuesioner</a>
                     </li>
                     <li class="nav-link">
-                      <a  href="{{ route('dataDiri') }}">Hasil kuesioner</a>
+                      <a  href="{{ route('riwayat') }}">Hasil kuesioner</a>
                     </li>
                 </ul>
               </li>

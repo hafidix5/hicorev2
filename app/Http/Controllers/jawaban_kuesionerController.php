@@ -266,10 +266,9 @@ class jawaban_kuesionerController extends Controller
     public function riwayat()
     {
         $response = DB::select('
-        SELECT pa.id as id,jk.tanggal as tanggal, pa.nama as nama,pa.hp as hp,pu.nama AS namaPuskesmas ,SUM(jk.jawaban) AS skor FROM puskesmas AS pu JOIN pasien AS pa ON pu.id=pa.puskesmas_id JOIN jawaban_kuesioner AS jk ON
-pa.id=jk.pasien_id JOIN kuesioner AS k ON jk.kuesioner_id=k.id WHERE jk.jawaban=k.kunci GROUP BY jk.tanggal,pa.id,pa.nama,pa.hp,pu.nama ORDER BY jk.tanggal desc
-        ');
-
+        SELECT jk.tanggal,p.id,p.nama,p.hp,SUM(jk.jawaban) AS skor FROM pasien AS p JOIN jawaban_kuesioner AS jk ON p.id=jk.pasien_id JOIN kuesioner AS k ON
+jk.kuesioner_id=k.id WHERE jk.jawaban=k.kunci AND jk.jenis_id=1 GROUP BY jk.tanggal,p.id,p.nama,p.hp ORDER BY jk.tanggal desc');
+       dd($response);
 
         return view('pages.table_list', compact('response'));
         // dd($response);
@@ -278,11 +277,10 @@ pa.id=jk.pasien_id JOIN kuesioner AS k ON jk.kuesioner_id=k.id WHERE jk.jawaban=
     public function riwayatpribadi()
     {
         $response = DB::select('
-        SELECT pa.id as id,jk.tanggal as tanggal, pa.nama as nama,pa.hp as hp,pu.nama AS namaPuskesmas ,SUM(jk.jawaban) AS skor FROM puskesmas AS pu JOIN pasien AS pa ON pu.id=pa.puskesmas_id JOIN jawaban_kuesioner AS jk ON
-pa.id=jk.pasien_id JOIN kuesioner AS k ON jk.kuesioner_id=k.id WHERE jk.jawaban=k.kunci and pa.id='.auth()->user()->id.' GROUP BY jk.tanggal,pa.id,pa.nama,pa.hp,pu.nama ORDER BY jk.tanggal desc
-
-        ');
-
+        SELECT jk.tanggal,p.id,p.nama,p.hp,SUM(jk.jawaban) AS skor FROM pasien AS p JOIN jawaban_kuesioner AS jk ON p.id=jk.pasien_id JOIN kuesioner AS k ON
+jk.kuesioner_id=k.id WHERE jk.jawaban=k.kunci AND jk.jenis_id=1 and p.id='.auth()->user()->id.' GROUP BY jk.tanggal,p.id,p.nama,p.hp ORDER BY jk.tanggal desc');
+      // dd($response);
+       
 
         return view('pages.table_list', compact('response'));
         // dd($response);

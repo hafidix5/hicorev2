@@ -7,26 +7,22 @@
       <div class="col-md-12">
         <div class="card">
           <div class="card-header card-header-primary">
-            <h4 class="card-title ">Riwayat Kuesioner</h4>
+            <h4 class="card-title ">Hasil Kuesioner</h4>
             <p class="card-category"></p>
           </div>
           <div class="card-body">
             <div class="table-responsive">
               <table class="table">
                 <thead class=" text-primary">
-
+                <th>
+                    Tanggal
+                  </th>
                   <th>
                     Nama
                   </th>
                   <th>
                     HP
-                  </th>
-                  <th>
-                    Puskesmas
-                  </th>
-                  <th>
-                    Tanggal
-                  </th>
+                  </th>                                  
                   <th>
                     Poin
                   </th>
@@ -38,11 +34,9 @@
 
                     @foreach ($response as $response)
                     <tr>
-
+                      <td>{{ $response->tanggal }}</td>
                         <td>{{ $response->nama }}</td>
-                        <td>{{ $response->hp}}</td>
-                        <td>{{ $response->namaPuskesmas }}</td>
-                        <td>{{ $response->tanggal }}</td>
+                        <td>{{ $response->hp}}</td>                    
                         <td>{{ $response->skor }}</td>
                         <td>
                             <a class="nav-link" href="{{ route('riwayatDetailKuesioner',['tanggal'=>$response->tanggal,'id'=>$response->id]) }}">
