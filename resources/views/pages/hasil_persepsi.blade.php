@@ -7,7 +7,7 @@
       <div class="col-md-12">
         <div class="card">
           <div class="card-header card-header-primary">
-            <h4 class="card-title ">Hasil Kuesioner</h4>
+            <h4 class="card-title ">Hasil Kuesioner Persepsi Berdasarkan tanggal</h4>
             <p class="card-category"></p>
           </div>
           <div class="card-body">
@@ -39,8 +39,8 @@
                         <td>{{ $response->hp}}</td>                    
                         <td>{{ $response->skor }}</td>
                         <td>
-                            <a class="nav-link" href="{{ route('riwayatDetailKuesioner',['tanggal'=>$response->tanggal,'id'=>$response->id]) }}">
-                                <i class="material-icons">visibility</i>
+                            <a class="nav-link" href="{{ route('riwayatDetailKuesioner_persepsi',['tanggal'=>$response->tanggal,'id'=>$response->id]) }}">
+                                <i class="material-icons">visibility</i> Lihat
                               </a>
                         </td>
                     </tr>

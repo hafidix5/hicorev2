@@ -39,10 +39,10 @@
                             <td>{{ $hasil_kesehatan->tgl_mengisi }}</td>
                             <th>
                                <a class="nav-link" href="{{ route('status_kesehatan.show',$hasil_kesehatan->id) }}">
-                                    <i class="material-icons"> </i> Lihat
+                               <i class="material-icons">visibility</i> Lihat
                                   </a>
                                   <a class="nav-link" href="{{ route('status_kesehatan.hasil',[$hasil_kesehatan->tgl_mengisi,$hasil_kesehatan->pasien_id,]) }}">
-                                    <i class="material-icons"> </i> Hasil
+                                    <i class="material-icons">verified_user </i> Hasil
                                   </a>
 
                             </th>

@@ -40,7 +40,9 @@ Route::get('/home', 'HomeController@index')->name('home')->middleware('auth');
 Route::group(['middleware' => 'auth'], function () {
     Route::get('table-list', 'jawaban_kuesionerController@riwayat')->name('table');
     Route::get('riwayat', 'jawaban_kuesionerController@riwayatpribadi')->name('riwayat');
-
+    Route::get('riwayat_persepsi', 'jawaban_kuesionerController@riwayatpribadi_persepsi')->name('riwayat_persepsi');
+    Route::get('riwayat_stress', 'jawaban_kuesionerController@riwayatpribadi_stress')->name('riwayat_stress');
+    Route::get('riwayat_pengendalian', 'jawaban_kuesionerController@riwayatpribadi_pengendalian')->name('riwayat_pengendalian');
     Route::get('isi_persepsi', 'KuesionerController@index')->name('isi_persepsi');
     Route::get('isi_pengetahuan', 'KuesionerController@indexpengetahuan')->name('isi_pengetahuan');
     Route::get('isi_stress', 'KuesionerController@indexstress')->name('isi_stress');
@@ -56,7 +58,9 @@ Route::group(['middleware' => 'auth'], function () {
     Route::get('status_kesehatan.create', 'status_kesehatanController@create')->name('status_kesehatan.create');
     Route::get('status_kesehatan.show/{id}', 'status_kesehatanController@show')->name('status_kesehatan.show');
     Route::get('status_kesehatan.hasil/{tgl}/{id}', 'status_kesehatanController@hasil')->name('status_kesehatan.hasil');
-    Route::get('riwayatdetail/{tanggal}/DetailKuesioner/{id}', 'jawaban_kuesionerController@detail')->name('riwayatDetailKuesioner');
+    Route::get('riwayatdetail/{tanggal}/DetailKuesioner/{id}/pengetahuan', 'jawaban_kuesionerController@detail')->name('riwayatDetailKuesioner_pengetahuan');
+    Route::get('riwayatdetail/{tanggal}/DetailKuesioner/{id}/persepsi', 'jawaban_kuesionerController@detail_persepsi')->name('riwayatDetailKuesioner_persepsi');
+    Route::get('riwayatdetail/{tanggal}/DetailKuesioner/{id}/stress', 'jawaban_kuesionerController@detail_stress')->name('riwayatDetailKuesioner_stress');
     Route::get('pendidikanKesehatan', 'edukasi_videoController@index')->name('pendidikanKesehatan');
         //Route::resource('isi_kuesioner', 'KuesionerController');
 

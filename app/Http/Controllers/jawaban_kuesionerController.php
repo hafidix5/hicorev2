@@ -282,7 +282,44 @@ jk.kuesioner_id=k.id WHERE jk.jawaban=k.kunci AND jk.jenis_id=1 and p.id='.auth(
       // dd($response);
        
 
-        return view('pages.table_list', compact('response'));
+        return view('pages.hasil_pengetahuan', compact('response'));
+        // dd($response);
+
+    }
+    public function riwayatpribadi_persepsi()
+    {
+        $response = DB::select('
+        SELECT jk.tanggal,p.id,p.nama,p.hp,SUM(jk.jawaban) AS skor FROM pasien AS p JOIN jawaban_kuesioner AS jk ON p.id=jk.pasien_id JOIN kuesioner AS k ON
+jk.kuesioner_id=k.id WHERE jk.jenis_id=2 and p.id='.auth()->user()->id.' GROUP BY jk.tanggal,p.id,p.nama,p.hp ORDER BY jk.tanggal desc');
+      // dd($response);
+       
+
+        return view('pages.hasil_persepsi', compact('response'));
+        // dd($response);
+
+    }
+    public function riwayatpribadi_stress()
+    {
+        $response = DB::select('
+        SELECT jk.tanggal,p.id,p.nama,p.hp,SUM(jk.jawaban) AS skor FROM pasien AS p JOIN jawaban_kuesioner AS jk ON p.id=jk.pasien_id JOIN kuesioner AS k ON
+jk.kuesioner_id=k.id WHERE jk.jenis_id=3 and p.id='.auth()->user()->id.' GROUP BY jk.tanggal,p.id,p.nama,p.hp ORDER BY jk.tanggal desc');
+      // dd($response);
+       
+
+        return view('pages.hasil_stress', compact('response'));
+        // dd($response);
+
+    }
+    public function riwayatpribadi_pengendalian()
+    {
+        $alkohol="alkohol";
+        $response = DB::select('
+        SELECT jk.tanggal,p.id,p.nama,p.hp,SUM(jk.jawaban) AS skor FROM pasien AS p JOIN jawaban_kuesioner AS jk ON p.id=jk.pasien_id JOIN kuesioner AS k ON
+jk.kuesioner_id=k.id WHERE k.sub_jenis!="'.$alkohol.'" and jk.jenis_id=4 and p.id='.auth()->user()->id.' GROUP BY jk.tanggal,p.id,p.nama,p.hp ORDER BY jk.tanggal desc');
+      // dd($response);
+       
+
+        return view('pages.hasil_pengendalian', compact('response'));
         // dd($response);
 
     }
@@ -320,11 +357,11 @@ ORDER BY k.id asc
 
         $pasien = pasien::find($id)->first();
 
-        $skorOren=DB::select('
+        $pengetahuan=DB::select('
         SELECT (case when SUM(jk.jawaban)<=17 then "Kurang"
                      when SUM(jk.jawaban)<=22 then "Baik"
             END)
-            AS skorOren FROM jawaban_kuesioner AS jk JOIN kuesioner AS k ON jk.kuesioner_id=k.id
+            AS pengetahuan FROM jawaban_kuesioner AS jk JOIN kuesioner AS k ON jk.kuesioner_id=k.id
  WHERE jk.pasien_id='.$id.' AND jk.tanggal="'.$tanggal.'"
 AND jk.jawaban=k.kunci AND k.id>=1 AND k.id<=22 limit 1
         ');
@@ -434,7 +471,7 @@ AND jk.jawaban=k.kunci AND k.id>=51 AND k.id<=60 limit 1
         Session()->put('sessionTanggal', $tanggal);
 
         return view('pages.riwayatKuesionerDetailPasien',
-        compact('pasien','response','skorOren','skorKuning','skorHijau','skorBiruMObat','skorBiruMDiet','skorBiruMFisik','skorBiruMRokok',
+        compact('pasien','response','pengetahuan','skorKuning','skorHijau','skorBiruMObat','skorBiruMDiet','skorBiruMFisik','skorBiruMRokok',
         'skorNavyBB','skorNavyAlkohol','skorBiru','imt','tekanandarah','rokok','obesitas'));
       //dd($skorMerahx);
     }
@@ -443,22 +480,22 @@ AND jk.jawaban=k.kunci AND k.id>=51 AND k.id<=60 limit 1
     {
         $response=DB::select('
         SELECT k.id as id,k.pertanyaan as pertanyaan from jawaban_kuesioner AS jk join kuesioner AS k ON
-jk.kuesioner_id=k.id WHERE jk.jawaban!=k.kunci AND jk.pasien_id='.$id.' and jk.tanggal="'.$tanggal.'"
+jk.kuesioner_id=k.id WHERE jk.jawaban!=k.kunci AND jk.jenis_id=1 AND jk.pasien_id='.$id.' and jk.tanggal="'.$tanggal.'"
 ORDER BY k.id asc
         ');
 
 
         $pasien = pasien::find($id)->first();
 
-        $skorOren=DB::select('
+        $pengetahuan=DB::select('
         SELECT (case when SUM(jk.jawaban)<=17 then "Kurang"
                      when SUM(jk.jawaban)<=22 then "Baik"
             END)
-            AS skorOren FROM jawaban_kuesioner AS jk JOIN kuesioner AS k ON jk.kuesioner_id=k.id
- WHERE jk.pasien_id='.$id.' AND jk.tanggal="'.$tanggal.'"
-AND jk.jawaban=k.kunci AND k.id>=1 AND k.id<=22 limit 1
+            AS pengetahuan FROM jawaban_kuesioner AS jk JOIN kuesioner AS k ON jk.kuesioner_id=k.id
+ WHERE jk.pasien_id='.$id.' AND jk.tanggal="'.$tanggal.'" AND jk.jenis_id=1
+AND jk.jawaban=k.kunci limit 1
         ');
-        $skorKuning=DB::select('
+        /* $skorKuning=DB::select('
         SELECT (case when SUM(jk.jawaban)<=9 then "Kurang"
                      when SUM(jk.jawaban)<=19 then "Cukup"
                      when SUM(jk.jawaban)<=28 then "Baik"
@@ -559,17 +596,65 @@ AND jk.jawaban=k.kunci AND k.id>=51 AND k.id<=60 limit 1
             when lingkar_perut<90 AND jk="laki-laki" then "Normal"
             when lingkar_perut<80 AND jk="perempuan" then "Normal"
 			END)  AS obesitas FROM pasien WHERE id='.$id.'
-        ');
+        '); */
 
         Session()->put('sessionTanggal', $tanggal);
         Session()->put('idPasien', $id);
 
-        return view('pages.riwayatKuesionerDetail',
-        compact('pasien','response','skorOren','skorKuning','skorHijau','skorBiruMObat','skorBiruMDiet','skorBiruMFisik','skorBiruMRokok',
-        'skorNavyBB','skorNavyAlkohol','skorBiru','imt','tekanandarah','rokok','obesitas'));
+        return view('pages.hasil_pengetahuanDetail',
+        compact('pasien','response','pengetahuan'));
       //dd($skorMerahx);
     }
+    public function detail_persepsi($tanggal,$id)
+    {
+        $response=DB::select('
+        SELECT k.id as id,k.pertanyaan as pertanyaan from jawaban_kuesioner AS jk join kuesioner AS k ON
+jk.kuesioner_id=k.id WHERE jk.jawaban!=k.kunci AND jk.jenis_id=1 AND jk.pasien_id='.$id.' and jk.tanggal="'.$tanggal.'"
+ORDER BY k.id asc
+        ');
 
+
+        $pasien = pasien::find($id)->first();
+
+        $persepsi=DB::select('
+        SELECT (case when SUM(jk.jawaban)<=9 then "Kurang"
+                     when SUM(jk.jawaban)<=19 then "Cukup"
+                     when SUM(jk.jawaban)<=28 then "Baik"
+			END)
+        AS persepsi FROM jawaban_kuesioner AS jk JOIN kuesioner AS k ON jk.kuesioner_id=k.id
+ WHERE jk.pasien_id='.$id.' AND jk.tanggal="'.$tanggal.'" and jk.jenis_id=2 limit 1
+        ');
+        Session()->put('sessionTanggal', $tanggal);
+        Session()->put('idPasien', $id);
+
+        return view('pages.hasil_persepsiDetail',
+        compact('pasien','response','persepsi'));
+    }
+    public function detail_stress($tanggal,$id)
+    {
+        $response=DB::select('
+        SELECT k.id as id,k.pertanyaan as pertanyaan from jawaban_kuesioner AS jk join kuesioner AS k ON
+jk.kuesioner_id=k.id WHERE jk.jawaban!=k.kunci AND jk.jenis_id=1 AND jk.pasien_id='.$id.' and jk.tanggal="'.$tanggal.'"
+ORDER BY k.id asc
+        ');
+
+
+        $pasien = pasien::find($id)->first();
+
+        $stress=DB::select('
+        SELECT (case when SUM(jk.jawaban)<=14 then "Ringan"
+        when SUM(jk.jawaban)<=26 then "Sedang"
+        when SUM(jk.jawaban)>26 then "Berat"
+			END)
+        AS stress FROM jawaban_kuesioner AS jk JOIN kuesioner AS k ON jk.kuesioner_id=k.id
+ WHERE jk.pasien_id='.$id.' AND jk.tanggal="'.$tanggal.'" and jk.jenis_id=3 limit 1
+        ');
+        Session()->put('sessionTanggal', $tanggal);
+        Session()->put('idPasien', $id);
+
+        return view('pages.hasil_stressDetail',
+        compact('pasien','response','stress'));
+    }
     /**
      * Remove the specified resource from storage.
      *

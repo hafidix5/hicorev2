@@ -49,7 +49,7 @@
                         <a  href="{{ route('isi_persepsi') }}">Isi kuesioner</a>
                     </li>
                     <li class="nav-link">
-                      <a  href="{{ route('dataDiri') }}">Hasil kuesioner</a>
+                      <a  href="{{ route('riwayat_persepsi') }}">Hasil kuesioner</a>
                     </li>
                 </ul>
               </li>
@@ -63,7 +63,7 @@
                         <a  href="{{ route('isi_stress') }}">Isi kuesioner</a>
                     </li>
                     <li class="nav-link">
-                      <a  href="{{ route('dataDiri') }}">Hasil kuesioner</a>
+                      <a  href="{{ route('riwayat_stress') }}">Hasil kuesioner</a>
                     </li>
                 </ul>
               </li>
@@ -92,7 +92,7 @@
                         <a  href="{{ route('isi_pengendalian') }}">Isi kuesioner</a>
                     </li>
                     <li class="nav-link">
-                      <a  href="{{ route('dataDiri') }}">Hasil kuesioner</a>
+                      <a  href="{{ route('riwayat_pengendalian') }}">Hasil kuesioner</a>
                     </li>
                 </ul>
               </li>
