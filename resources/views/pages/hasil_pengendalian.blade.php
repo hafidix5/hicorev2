@@ -39,7 +39,7 @@
                         <td>{{ $response->hp}}</td>                    
                         <td>{{ $response->skor }}</td>
                         <td>
-                            <a class="nav-link" href="{{ route('riwayatDetailKuesioner',['tanggal'=>$response->tanggal,'id'=>$response->id]) }}">
+                            <a class="nav-link" href="{{ route('riwayatDetailKuesioner_pengendalian',['tanggal'=>$response->tanggal,'id'=>$response->id]) }}">
                                 <i class="material-icons">visibility</i> Lihat
                               </a>
                         </td>

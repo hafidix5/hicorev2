@@ -655,6 +655,76 @@ ORDER BY k.id asc
         return view('pages.hasil_stressDetail',
         compact('pasien','response','stress'));
     }
+    public function detail_pengendalian($tanggal,$id)
+    {
+        $response=DB::select('
+        SELECT k.id as id,k.pertanyaan as pertanyaan from jawaban_kuesioner AS jk join kuesioner AS k ON
+jk.kuesioner_id=k.id WHERE jk.jawaban!=k.kunci AND jk.jenis_id=1 AND jk.pasien_id='.$id.' and jk.tanggal="'.$tanggal.'"
+ORDER BY k.id asc
+        ');
+
+
+        $pasien = pasien::find($id)->first();
+        $obatjenis="obat-obatan";
+        $obat=DB::select('
+        SELECT (case when SUM(jk.jawaban)<21 then "Tidak patuh"
+                     when SUM(jk.jawaban)>=21 then "Patuh"
+			END) AS obat FROM jawaban_kuesioner AS jk JOIN kuesioner AS k ON jk.kuesioner_id=k.id
+ WHERE jk.pasien_id='.$id.' AND jk.tanggal="'.$tanggal.'" and jk.jenis_id=4 and k.sub_jenis=
+ "'.$obatjenis.'" 
+        ');
+        $dietjenis="diet";
+        $diet=DB::select('
+        SELECT (case when SUM(jk.jawaban)<84 then "Tidak patuh"
+                     when SUM(jk.jawaban)>=84 then "Patuh"
+			END) AS diet FROM jawaban_kuesioner AS jk JOIN kuesioner AS k ON jk.kuesioner_id=k.id
+ WHERE jk.pasien_id='.$id.' AND jk.tanggal="'.$tanggal.'" and jk.jenis_id=4 and k.sub_jenis=
+ "'.$dietjenis.'"  
+        ');
+        
+        $fisikjenis="aktivitas_fisik";
+        $fisik=DB::select('
+        SELECT (case when SUM(jk.jawaban)<14 then "Tidak patuh"
+                     when SUM(jk.jawaban)>=14 then "Patuh"
+			END) AS fisik FROM jawaban_kuesioner AS jk JOIN kuesioner AS k ON jk.kuesioner_id=k.id
+ WHERE jk.pasien_id='.$id.' AND jk.tanggal="'.$tanggal.'" and jk.jenis_id=4 and k.sub_jenis=
+ "'.$fisikjenis.'"
+        ');
+        
+        $rokokjenis="merokok";
+        $merokok=DB::select('
+        SELECT (case when SUM(jk.jawaban)=0 then "Patuh"
+                     when SUM(jk.jawaban)>0 then "Tidak patuh"
+			END) AS merokok FROM jawaban_kuesioner AS jk JOIN kuesioner AS k ON jk.kuesioner_id=k.id
+ WHERE jk.pasien_id='.$id.' AND jk.tanggal="'.$tanggal.'" and jk.jenis_id=4 and k.sub_jenis=
+ "'.$rokokjenis.'"
+        ');
+        
+        $bbjenis="manajemen_bb";
+        $beratbadan=DB::select('
+        SELECT (case when SUM(jk.jawaban)<40 then "Tidak Patuh"
+                     when SUM(jk.jawaban)>=40 then "Patuh"
+			END) AS beratbadan FROM jawaban_kuesioner AS jk JOIN kuesioner AS k ON jk.kuesioner_id=k.id
+ WHERE jk.pasien_id='.$id.' AND jk.tanggal="'.$tanggal.'" and jk.jenis_id=4 and k.sub_jenis=
+ "'.$bbjenis.'"
+        ');
+        
+        $minumalkoholjenis="minum_alkohol";
+        $minumalkohol2jenis="alkohol";
+        $minumalkohol=DB::select('
+        SELECT (case when SUM(jk.jawaban)=0 then "Patuh"
+        when SUM(jk.jawaban)>0 then "Tidak patuh"
+END)  AS minumalkohol FROM jawaban_kuesioner AS jk JOIN kuesioner AS k ON jk.kuesioner_id=k.id
+ WHERE jk.pasien_id='.$id.' AND jk.tanggal="'.$tanggal.'" and jk.jenis_id=4 and k.sub_jenis=
+ "'.$minumalkoholjenis.'" OR k.sub_jenis="'.$minumalkohol2jenis.'"
+        ');        
+       // dd($minumalkohol);
+        Session()->put('sessionTanggal', $tanggal);
+        Session()->put('idPasien', $id);
+
+        return view('pages.hasil_stressDetail',
+        compact('pasien','response','obat','diet','fisik','merokok','beratbadan','minumalkohol'));
+    }
     /**
      * Remove the specified resource from storage.
      *

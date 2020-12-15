@@ -61,6 +61,8 @@ Route::group(['middleware' => 'auth'], function () {
     Route::get('riwayatdetail/{tanggal}/DetailKuesioner/{id}/pengetahuan', 'jawaban_kuesionerController@detail')->name('riwayatDetailKuesioner_pengetahuan');
     Route::get('riwayatdetail/{tanggal}/DetailKuesioner/{id}/persepsi', 'jawaban_kuesionerController@detail_persepsi')->name('riwayatDetailKuesioner_persepsi');
     Route::get('riwayatdetail/{tanggal}/DetailKuesioner/{id}/stress', 'jawaban_kuesionerController@detail_stress')->name('riwayatDetailKuesioner_stress');
+    Route::get('riwayatdetail/{tanggal}/DetailKuesioner/{id}/pengendalian', 'jawaban_kuesionerController@detail_pengendalian')->name('riwayatDetailKuesioner_pengendalian');
+    
     Route::get('pendidikanKesehatan', 'edukasi_videoController@index')->name('pendidikanKesehatan');
         //Route::resource('isi_kuesioner', 'KuesionerController');
 
