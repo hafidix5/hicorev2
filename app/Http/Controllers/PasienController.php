@@ -45,7 +45,7 @@ class PasienController extends Controller
        }
        else
        {
-        return view('dashboard',compact('jpasien','jpuskesmas','kuesioner','hasil'));
+        return view('dashboard',compact('jpasien','kuesioner','hasil'));
        }
 
     }

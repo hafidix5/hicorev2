@@ -8,7 +8,7 @@ class kuesioner extends Model
 {
     protected $table='kuesioner';
     protected $fillable = [
-        'pertanyaan','kunci'
+        'pertanyaan','jenis_id'
     ];
     public function kuesioner(){
         return $this->hasMany('App\jawaban_kuesioner');

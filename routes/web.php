@@ -64,7 +64,19 @@ Route::group(['middleware' => 'auth'], function () {
     Route::get('riwayatdetail/{tanggal}/DetailKuesioner/{id}/pengendalian', 'jawaban_kuesionerController@detail_pengendalian')->name('riwayatDetailKuesioner_pengendalian');
     
     Route::get('pendidikanKesehatan', 'edukasi_videoController@index')->name('pendidikanKesehatan');
+
+    Route::get('video_pengetahuan', 'jenisController@video_pengetahuan')->name('video_pengetahuan');
+    Route::get('video_persepsi', 'jenisController@video_persepsi')->name('video_persepsi');
+    Route::get('video_stress', 'jenisController@video_stress')->name('video_stress');
+    Route::get('video_pengendalian', 'jenisController@video_pengendalian')->name('video_pengendalian');
         //Route::resource('isi_kuesioner', 'KuesionerController');
+        Route::get('pertanyaan_pengetahuan', 'kuesionerController@showPengetahuan')->name('pertanyaan_pengetahuan');
+        Route::get('pertanyaan_pengetahuan.insert', 'kuesionerController@insertPengetahuan')->name('pertanyaan_pengetahuan.insert');
+        Route::post('pertanyaan_pengetahuan.store', ['as' => 'pertanyaan_pengetahuan.store', 'uses' => 'kuesionerController@storePengetahuan']);
+        Route::get('pertanyaan_pengetahuan.edit/{id}', ['as' => 'pertanyaan_pengetahuan.edit', 'uses' => 'kuesionerController@editPengetahuan']);
+        Route::put('pertanyaan_pengetahuan.update/{id}', ['as' => 'pertanyaan_pengetahuan.update', 'uses' => 'kuesionerController@updatePengetahuan']);
+        Route::get('pertanyaan_pengetahuan.hapus/{id}', ['as' => 'pertanyaan_pengetahuan.hapus', 'uses' => 'kuesionerController@destroyPengetahuan']);
+    
 
         Route::get('dataDiri', 'PasienController@index')->name('dataDiri');
 

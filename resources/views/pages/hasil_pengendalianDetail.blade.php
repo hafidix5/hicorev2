@@ -15,77 +15,41 @@
                 <div class="row">
                   <div class="col-sm">
                     <div class="card text-center">
-                        <h5 class="card-header">Pengetahuan Pasien Hipertensi</h5>
+                        <h5 class="card-header">Penggunaan Obat-Obatan</h5>
                         <div class="card-body ">
                             <a href="#" class="btn btn-primary disabled">
-                                @foreach ($skorOren as $skor)
-                                {{ $skor->skorOren }}
-                                @endforeach
+                                 @php
+                                 $obatr="";
+                             @endphp
+                             @foreach ($obat as $skor)
+                              {{ $skor->obat }}
+                              
+                              @if ($skor->obat=="Tidak patuh")
+                              @php
+                                 $obatr="yes";
+                             @endphp
+
+                             @else
+                              @endif
+                              @endforeach
                                 </a>
                         </div>
                       </div>
                   </div>
                   <div class="col-sm">
                      <div class="card text-center">
-                        <h5 class="card-header">Persepsi Pasien Hipertensi</h5>
-                        <div class="card-body">
-                            <a href="#" class="btn btn-primary disabled">
-                              @foreach ($skorKuning as $skor)
-                              {{ $skor->skorKuning }}
-                              @endforeach
-                              </a>
-                          </div>
-                      </div>
-                  </div>
-                  <div class="col-sm">
-                     <div class="card text-center">
-                        <h5 class="card-header">Tingkat Kepatuhan Obat</h5>
-                        <div class="card-body">
-                            <a href="#" class="btn btn-primary disabled">
-                              @foreach ($skorHijau as $skor)
-                              {{ $skor->skorHijau }}
-                              @endforeach
-                              </a>
-                          </div>
-                      </div>
-                  </div>
-                  <div class="col-sm">
-                    <div class="card text-center">
-                       <h5 class="card-header">Penggunaan Obat-obatan</h5>
-                       <div class="card-body">
-                           <a href="#" class="btn btn-primary disabled">
-                            @php
-                            $minumobat="";
-                        @endphp
-                            @foreach ($skorBiruMObat as $skor)
-                             {{ $skor->skorBiruMObat }}
-                             @if ($skor->skorBiruMObat=="Tidak patuh")
-                             @php
-                                $minumobat="Minum Obat, ";
-                            @endphp
-                             @endif
-                             @endforeach
-                             </a>
-                         </div>
-                     </div>
-                 </div>
-                </div>
-              </div>
-              <div class="container">
-                <div class="row">
-                  <div class="col-sm">
-                     <div class="card text-center">
                         <h5 class="card-header">Diet</h5>
                         <div class="card-body">
-                            <a href="#" class="btn btn-primary disabled">
-                                @php
-                                 $diet="";
-                            @endphp
-                                @foreach ($skorBiruMDiet as $skor)
-                              {{ $skor->skorBiruMDiet }}
-                              @if ($skor->skorBiruMDiet=="Tidak patuh")
+                            <a href="#" class="btn btn-primary disabled">                              
                               @php
-                                 $diet="yes";
+                                 $dietr="";
+                             @endphp
+                             @foreach ($diet as $skor)
+                              {{ $skor->diet }}
+                              
+                              @if ($skor->diet=="Tidak patuh")
+                              @php
+                                 $dietr="yes";
                              @endphp
 
                              @else
@@ -100,15 +64,16 @@
                         <h5 class="card-header">Aktifitas Fisik</h5>
                         <div class="card-body">
                             <a href="#" class="btn btn-primary disabled">
-                                @php
-                                $aktifitas_fisik="";
-                                $rekomendasidmo="";
-                            @endphp
-                                @foreach ($skorBiruMFisik as $skor)
-                              {{ $skor->skorBiruMFisik }}
-                              @if ($skor->skorBiruMFisik=="Tidak patuh")
+                             
                               @php
-                                 $aktifitas_fisik="Aktifitas Fisik, ";
+                                 $fisikr="";
+                             @endphp
+                             @foreach ($fisik as $skor)
+                              {{ $skor->fisik }}
+                              
+                              @if ($skor->fisik=="Tidak patuh")
+                              @php
+                                 $fisikr="yes";
                              @endphp
 
                              @else
@@ -123,42 +88,21 @@
                        <h5 class="card-header">Merokok</h5>
                        <div class="card-body">
                            <a href="#" class="btn btn-primary disabled">
-                            @php
-                                $merokok="";
-                            @endphp
-                            @foreach ($skorBiruMRokok as $skor)
-                             {{ $skor->skorBiruMRokok }}
-                             @if ($skor->skorBiruMRokok=="Tidak patuh")
-                             @php
-                                $merokok="yes";
-                            @endphp
+                           
+                              @php
+                                 $merokokr="";
+                             @endphp
+                             @foreach ($merokok as $skor)
+                              {{ $skor->merokok }}
+                              
+                              @if ($skor->merokok=="Tidak patuh")
+                              @php
+                                 $merokokr="yes";
+                             @endphp
 
-                            @else
-                             @endif
-                             @endforeach
-                             </a>
-                         </div>
-                     </div>
-                 </div>
-                 <div class="col-sm">
-                    <div class="card text-center">
-                       <h5 class="card-header">Manajemen Berat Badan</h5>
-                       <div class="card-body">
-                           <a href="#" class="btn btn-primary disabled">
-                            @php
-                                $manajemenbb="";
-                            @endphp
-
-                            @foreach ($skorNavyBB as $skor)
-                             {{ $skor->skorNavyBB }}
-                             @if ($skor->skorNavyBB=="Tidak patuh")
-                             @php
-                                $manajemenbb="yes";
-                            @endphp
-
-                            @else
-                             @endif
-                             @endforeach
+                             @else
+                              @endif
+                              @endforeach
                              </a>
                          </div>
                      </div>
@@ -167,41 +111,20 @@
               </div>
               <div class="container">
                 <div class="row">
-                    <div class="col-sm">
-                        <div class="card text-center">
-                           <h5 class="card-header">Alkohol</h5>
-                           <div class="card-body">
-                               <a href="#" class="btn btn-primary disabled">
-                                @php
-                                 $alkohol="";
-                             @endphp
-                                @foreach ($skorNavyAlkohol as $skor)
-                                 {{ $skor->skorNavyAlkohol }}
-                                 @if ($skor->skorNavyAlkohol=="Tidak patuh")
-                              @php
-                                  $alkohol="yes";
-                             @endphp
-
-                             @else
-                              @endif
-                                 @endforeach
-                                 </a>
-                             </div>
-                         </div>
-                     </div>
                   <div class="col-sm">
                      <div class="card text-center">
-                        <h5 class="card-header">Stress Pasien Hipertensi</h5>
+                        <h5 class="card-header">Manajemen Berat Badan</h5>
                         <div class="card-body">
-                            <a href="#" class="btn btn-primary disabled">
-                                @php
-                                $stress="";
-                            @endphp
-                                @foreach ($skorBiru as $skor)
-                              {{ $skor->skorBiru }}
-                              @if ($skor->skorBiru!="Ringan")
+                            <a href="#" class="btn btn-primary disabled">                            
                               @php
-                                 $stress="Pengendalian Stres Pada Hipertensi, ";
+                                 $beratbadanr="";
+                             @endphp
+                             @foreach ($beratbadan as $skor)
+                              {{ $skor->beratbadan }}
+                             
+                              @if ($skor->beratbadan=="Tidak patuh")
+                              @php
+                                 $beratbadanr="yes";
                              @endphp
 
                              @else
@@ -213,116 +136,56 @@
                   </div>
                   <div class="col-sm">
                      <div class="card text-center">
-                        <h5 class="card-header">Status Berat Badan</h5>
+                        <h5 class="card-header">Minum Alkohol</h5>
                         <div class="card-body">
                             <a href="#" class="btn btn-primary disabled">
-                              @foreach ($imt as $skor)
-                              {{ $skor->imt }}
-                              @endforeach
-                              </a>
-                          </div>
-                      </div>
-                  </div>
-                  <div class="col-sm">
-                     <div class="card text-center">
-                        <h5 class="card-header">Tekanan Darah</h5>
-                        <div class="card-body">
-                            <a href="#" class="btn btn-primary disabled">
-                                @php
-                                $hipetensiRekomendasi="";
-                                $hipetensiRekomendasi2="";
-                                $hipetensiRekomendasitopik="";
-                            @endphp
-                                @foreach ($tekanandarah as $skor)
-                              {{ $skor->tekanandarah }}
-                              @if (($skor->tekanandarah=="Hipertensi Derajat 1")||($skor->tekanandarah=="Hipertensi Derajat 2"))
+                            
                               @php
-                                 $hipetensiRekomendasi="yes";
-                                 $hipetensiRekomendasitopik="Pengenalan Hipertensi, Cara Mengukur Tekanan Darah, ";
+                                 $minumalkoholr="";
                              @endphp
-                              @endif
-                              @if ($skor->tekanandarah=="Hipertensi Derajat 3")
+                             @foreach ($minumalkohol as $skor)
+                              {{ $skor->minumalkohol }}
+                              
+                              @if ($skor->minumalkohol=="Tidak patuh")
                               @php
-                                 $hipetensiRekomendasi2="yes";
+                                 $minumalkoholr="yes";
                              @endphp
-                              @endif
-                              @endforeach
-                              </a>
-                          </div>
-                      </div>
-                  </div>
 
+                             @else
+                              @endif
+                              @endforeach
+                              </a>
+                          </div>
+                      </div>
+                  </div>
+                                 
                 </div>
               </div>
-              <div class="container">
-                <div class="row">
-                    <div class="col-sm">
-                        <div class="card text-center">
-                           <h5 class="card-header">Rokok</h5>
-                           <div class="card-body">
-                               <a href="#" class="btn btn-primary disabled">
-                                 @foreach ($rokok as $skor)
-                                 {{ $skor->rokok }}
-                                 @endforeach
-                                 </a>
-                             </div>
-                         </div>
-                     </div>
-                  <div class="col-sm">
-                     <div class="card text-center">
-                        <h5 class="card-header">Obesitas</h5>
-                        <div class="card-body">
-                            <a href="#" class="btn btn-primary disabled">
-                            @php
-                                 $obesitas2="";
-                             @endphp
-                              @foreach ($obesitas as $skor)
-                              {{ $skor->obesitas }}
-                              @if ($skor->obesitas=="Obesitas Sentral")
-                              @php
-                                 $obesitas2="yes";
-                             @endphp
-
-                             @else
-                              @endif
-                              @endforeach
-                              </a>
-                          </div>
-                      </div>
-                  </div>
-
-                </div>
-              </div>
-              @if (($diet="yes")||($manajemenbb="yes")||($obesitas2="yes"))
+              @php
+              $rekomendasidmo="";
+              $rekomendasima="";
+              @endphp
+              @if (($dietr="yes")||($beratbadanr="yes"))
                 @php
-                    $rekomendasidmo="Pengaturan Diet Hipertensi dan Cara Mengukur Berat Badan dan Lingkar Tubuh, ";
+                    $rekomendasidmo="Pengaturan Diet Hipertensi dan Manajemen Berat Badan, ";
                 @endphp
               @endif
-              @if (($merokok="yes")||($alkohol="yes"))
+              @if (($merokokr="yes")||($minumalkoholr="yes"))
               @php
                   $rekomendasima="Pengenalan Bahaya Rokok dan Alkohol Pada Hipertensi, ";
               @endphp
             @endif
 
               <h4>Rekomendasi :</h4>
-              @if(($minumobat!="")|| ($aktifitas_fisik!="")|| ($rekomendasidmo!="")|| ($rekomendasima!="")||($stress!=""||($hipetensiRekomendasitopik!="")))
+              @if(($obatr!="")|| ($fisikr!="")|| ($rekomendasidmo!="")|| ($rekomendasima!=""))
               <p>
-                Silahkan bapak ibuk untuk mendengarkan kembali pendidikan kesehatan dengan topik {{$aktifitas_fisik}}{{$minumobat}}{{$rekomendasidmo}} {{$rekomendasima}} {{$stress}}{{$hipetensiRekomendasitopik}}
+                Silahkan bapak ibuk untuk mendengarkan kembali pendidikan kesehatan dengan topik {{$rekomendasidmo}} {{$rekomendasima}}
               </p>
               @endif
               <p>
                 Segera hubungi petugas kesehatan melalui link whatsapp untuk melakukan konsultasi bila ada yang tidak dipahami
               </p>
-              @if($hipetensiRekomendasi=="yes")
-              <p>
-                Bapak/ibu tetap terus mengkonsumsi obat hipertensi secara teratur. Bila obat habis segeralah datang ke puskesmas/ dokter keluarga dan lakukan perubahan gaya hidup tidak sehat menjadi sehat
-              </p>
-              @endif
-              @if($hipetensiRekomendasi2=="yes")
-              <p>
-                Segera dan jangan menunda untuk memeriksakan diri ke dokter
-              </p>
-              @endif
+              
 
 
 

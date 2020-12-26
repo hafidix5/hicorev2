@@ -23,6 +23,7 @@ class HasilKuesionerExport implements FromCollection, WithHeadings
         ->rightjoin('kuesioner','jawaban_kuesioner.kuesioner_id','=','kuesioner.id')
         ->where('jawaban_kuesioner.pasien_id','=',Session::get('idPasien'))
         ->where('jawaban_kuesioner.tanggal','=',Session::get('sessionTanggal'))
+        ->where('jawaban_kuesioner.jenis_id','=',Session::get('jenis'))
         ->orderBy('jawaban_kuesioner.tanggal','ASC')
         ->get();
 

@@ -101,6 +101,74 @@ class KuesionerController extends Controller
 {
     return Excel::download(new HasilKuesionerExport, 'hasilKuesioner-'.$nama.'.xlsx' );
 }
+    
+    public function showPengetahuan()
+    {/* 
+        $kpengetahuan=DB::table('kuesioner')
+        ->rightJoin('detekos','detekos.jenis_edukasi_id','=','jenis_edukasi.id')
+        ->select('jenis_edukasi.nama as jenis_edukasi','detekos.nama as nama',
+        'detekos.video as video','detekos.id as id')->get(); */
+        $pertanyaan_pengetahuan=kuesioner::where('kuesioner.jenis_id', '1')
+       ->select('kuesioner.id as id', 'kuesioner.pertanyaan as pertanyaan')->get();
+       // dd($detekos);
+      /*  $user_with_organization = User::where('id', $user_id)
+    ->leftJoin('organizations', 'users.organization_id', '=', 'organizations.id')
+    ->select('users.id','organizations.name')->first(); */
+        return view('pages.pertanyaan_pengetahuan',['pertanyaan_pengetahuan'=>$pertanyaan_pengetahuan]);
+    }
+    public function insertPengetahuan()
+    {
+                
+        return view('pages.pertanyaan_pengetahuan_insert');
+    }
+    public function storePengetahuan(Request $request)
+    {
+        
+        $this->validate($request,[
+            'pertanyaan' => 'required',
+            'jenis_id' => 'required'
+    	]);
+        $jenis_id = (int) $request->get('jenis_id');
+        
+        kuesioner::create([
+            'pertanyaan' => $request->pertanyaan,
+            'jenis_id' => $jenis_id
+        ]);
+        //dd($hasil);
+
+            return redirect('pertanyaan_pengetahuan')->withStatus(__('Data berhasil disimpan'));
+    }
+
+    public function editPengetahuan($id)
+    {
+       
+        $pertanyaan_pengetahuan=kuesioner::where('kuesioner.id', $id)
+        ->select('kuesioner.id as id', 'kuesioner.pertanyaan as pertanyaan')->first();
+        //dd($pertanyaan_pengetahuan);
+        return view('pages.pertanyaan_pengetahuan_edit',['pertanyaan_pengetahuan'=>$pertanyaan_pengetahuan]);
+    }
+
+    public function updatePengetahuan(Request $request, $id)
+    {
+      
+       $this->validate($request,[
+        'pertanyaan' => 'required'
+    ]);
+
+     $kuesioner = kuesioner::find($id);
+     $kuesioner->pertanyaan = $request->pertanyaan;
+     $kuesioner->save();
+     return redirect('pertanyaan_pengetahuan')->withStatus(__('Data berhasil diubah'));
+
+
+    }
+    public function destroyPengetahuan($id)
+    {
+        $kuesioner=kuesioner::find($id);
+        $kuesioner->delete();
+        return redirect('pertanyaan_pengetahuan')->withStatus(__('Data berhasil dihapus'));
+    }
+
     public function create()
     {
 

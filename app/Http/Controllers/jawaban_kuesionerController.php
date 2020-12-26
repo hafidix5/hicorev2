@@ -268,7 +268,7 @@ class jawaban_kuesionerController extends Controller
         $response = DB::select('
         SELECT jk.tanggal,p.id,p.nama,p.hp,SUM(jk.jawaban) AS skor FROM pasien AS p JOIN jawaban_kuesioner AS jk ON p.id=jk.pasien_id JOIN kuesioner AS k ON
 jk.kuesioner_id=k.id WHERE jk.jawaban=k.kunci AND jk.jenis_id=1 GROUP BY jk.tanggal,p.id,p.nama,p.hp ORDER BY jk.tanggal desc');
-       dd($response);
+      // dd($response);
 
         return view('pages.table_list', compact('response'));
         // dd($response);
@@ -480,7 +480,7 @@ AND jk.jawaban=k.kunci AND k.id>=51 AND k.id<=60 limit 1
     {
         $response=DB::select('
         SELECT k.id as id,k.pertanyaan as pertanyaan from jawaban_kuesioner AS jk join kuesioner AS k ON
-jk.kuesioner_id=k.id WHERE jk.jawaban!=k.kunci AND jk.jenis_id=1 AND jk.pasien_id='.$id.' and jk.tanggal="'.$tanggal.'"
+jk.kuesioner_id=k.id WHERE jk.jenis_id=1 AND jk.pasien_id='.$id.' and jk.tanggal="'.$tanggal.'"
 ORDER BY k.id asc
         ');
 
@@ -600,6 +600,7 @@ AND jk.jawaban=k.kunci AND k.id>=51 AND k.id<=60 limit 1
 
         Session()->put('sessionTanggal', $tanggal);
         Session()->put('idPasien', $id);
+        Session()->put('jenis', 1);
 
         return view('pages.hasil_pengetahuanDetail',
         compact('pasien','response','pengetahuan'));
@@ -609,7 +610,7 @@ AND jk.jawaban=k.kunci AND k.id>=51 AND k.id<=60 limit 1
     {
         $response=DB::select('
         SELECT k.id as id,k.pertanyaan as pertanyaan from jawaban_kuesioner AS jk join kuesioner AS k ON
-jk.kuesioner_id=k.id WHERE jk.jawaban!=k.kunci AND jk.jenis_id=1 AND jk.pasien_id='.$id.' and jk.tanggal="'.$tanggal.'"
+jk.kuesioner_id=k.id WHEREjk.jenis_id=2 AND jk.pasien_id='.$id.' and jk.tanggal="'.$tanggal.'"
 ORDER BY k.id asc
         ');
 
@@ -626,6 +627,7 @@ ORDER BY k.id asc
         ');
         Session()->put('sessionTanggal', $tanggal);
         Session()->put('idPasien', $id);
+        Session()->put('jenis', 2);
 
         return view('pages.hasil_persepsiDetail',
         compact('pasien','response','persepsi'));
@@ -634,7 +636,7 @@ ORDER BY k.id asc
     {
         $response=DB::select('
         SELECT k.id as id,k.pertanyaan as pertanyaan from jawaban_kuesioner AS jk join kuesioner AS k ON
-jk.kuesioner_id=k.id WHERE jk.jawaban!=k.kunci AND jk.jenis_id=1 AND jk.pasien_id='.$id.' and jk.tanggal="'.$tanggal.'"
+jk.kuesioner_id=k.id WHERE  jk.jenis_id=3 AND jk.pasien_id='.$id.' and jk.tanggal="'.$tanggal.'"
 ORDER BY k.id asc
         ');
 
@@ -651,6 +653,7 @@ ORDER BY k.id asc
         ');
         Session()->put('sessionTanggal', $tanggal);
         Session()->put('idPasien', $id);
+        Session()->put('jenis', 3);
 
         return view('pages.hasil_stressDetail',
         compact('pasien','response','stress'));
@@ -659,7 +662,7 @@ ORDER BY k.id asc
     {
         $response=DB::select('
         SELECT k.id as id,k.pertanyaan as pertanyaan from jawaban_kuesioner AS jk join kuesioner AS k ON
-jk.kuesioner_id=k.id WHERE jk.jawaban!=k.kunci AND jk.jenis_id=1 AND jk.pasien_id='.$id.' and jk.tanggal="'.$tanggal.'"
+jk.kuesioner_id=k.id WHERE jk.jenis_id=4 AND jk.pasien_id='.$id.' and jk.tanggal="'.$tanggal.'"
 ORDER BY k.id asc
         ');
 
@@ -721,8 +724,9 @@ END)  AS minumalkohol FROM jawaban_kuesioner AS jk JOIN kuesioner AS k ON jk.kue
        // dd($minumalkohol);
         Session()->put('sessionTanggal', $tanggal);
         Session()->put('idPasien', $id);
+        Session()->put('jenis', 4);
 
-        return view('pages.hasil_stressDetail',
+        return view('pages.hasil_pengendalianDetail',
         compact('pasien','response','obat','diet','fisik','merokok','beratbadan','minumalkohol'));
     }
     /**
