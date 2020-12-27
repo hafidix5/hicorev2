@@ -156,10 +156,10 @@
                         <a  href="{{ route('pertanyaan_pengetahuan') }}">Daftar Pertanyaan</a>
                     </li>
                     <li class="nav-link">
-                      <a  href="{{ route('riwayat') }}">Hasil kuesioner</a>
+                      <a  href="{{ route('riwayat_admin') }}">Hasil kuesioner</a>
                     </li>
                     <li class="nav-link">
-                      <a  href="{{ route('video_pengetahuan') }}">Daftar Video</a>
+                      <a  href="{{ route('video_pengetahuan_admin') }}">Daftar Video</a>
                     </li>
                 </ul>
               </li>
@@ -173,10 +173,10 @@
                         <a  href="{{ route('pertanyaan_persepsi') }}">Daftar Pertanyaan</a>
                     </li>
                     <li class="nav-link">
-                      <a  href="{{ route('riwayat_persepsi') }}">Hasil kuesioner</a>
+                      <a  href="{{ route('riwayat_persepsi_admin') }}">Hasil kuesioner</a>
                     </li>
                     <li class="nav-link">
-                      <a  href="{{ route('video_persepsi') }}">Daftar Video</a>
+                      <a  href="{{ route('video_persepsi_admin') }}">Daftar Video</a>
                     </li>
                 </ul>
               </li>
@@ -190,10 +190,10 @@
                         <a  href="{{ route('pertanyaan_stress') }}">Daftar Pertanyaan</a>
                     </li>
                     <li class="nav-link">
-                      <a  href="{{ route('riwayat_stress') }}">Hasil kuesioner</a>
+                      <a  href="{{ route('riwayat_stress_admin') }}">Hasil kuesioner</a>
                     </li>
                     <li class="nav-link">
-                      <a  href="{{ route('video_stress') }}">Daftar Video</a>
+                      <a  href="{{ route('video_stress_admin') }}">Daftar Video</a>
                     </li>
                 </ul>
               </li>
@@ -207,7 +207,7 @@
                         <a  href="{{ route('status_kesehatan.create') }}">Daftar Pertanyaan</a>
                     </li>
                     <li class="nav-link">
-                      <a  href="{{ route('status_kesehatan') }}">Hasil kuesioner</a>
+                      <a  href="{{ route('status_kesehatan_admin') }}">Hasil kuesioner</a>
                     </li>
                 </ul>
               </li>
@@ -222,10 +222,10 @@
                         <a  href="{{ route('pertanyaan_pengendalian') }}">Daftar Pertanyaan</a>
                     </li>
                     <li class="nav-link">
-                      <a  href="{{ route('riwayat_pengendalian') }}">Hasil kuesioner</a>
+                      <a  href="{{ route('riwayat_pengendalian_admin') }}">Hasil kuesioner</a>
                     </li>
                     <li class="nav-link">
-                      <a  href="{{ route('video_pengendalian') }}">Daftar Video</a>
+                      <a  href="{{ route('video_pengendalian_admin') }}">Daftar Video</a>
                     </li>
                 </ul>
               </li>

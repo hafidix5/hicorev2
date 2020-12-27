@@ -26,6 +26,18 @@ class status_kesehatanController extends Controller
         //dd($hasil_kesehatan);
         return view('pages.status_kesehatanIndex', ['hasil_kesehatan'=>$hasil_kesehatan]);
     }
+    public function index_admin()
+    {        
+        
+        $hasil_kesehatan=DB::table('status_kesehatan')
+        ->rightjoin('pasien','status_kesehatan.pasien_id','=','pasien.id')
+        ->OrderBy('tgl_mengisi','DESC')
+        ->select ('tgl_mengisi','status_kesehatan.id','pasien_id','nama')
+        ->groupby('tgl_mengisi','status_kesehatan.id','pasien_id','nama')
+        ->get();
+       // dd($hasil_kesehatan);
+        return view('pages.status_kesehatanIndex', ['hasil_kesehatan'=>$hasil_kesehatan]);
+    }
 
     /**
      * Show the form for creating a new resource.

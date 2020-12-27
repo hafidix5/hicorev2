@@ -25,6 +25,7 @@
                         </div>
                       </div>
                   </div>
+                  </div>
                   
 
               @if(Auth::check()&& Auth::user()->role  == "2")

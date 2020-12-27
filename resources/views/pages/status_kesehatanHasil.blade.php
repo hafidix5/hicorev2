@@ -67,9 +67,7 @@
 
 
             </div>
-            <div class="card-footer ml-auto mr-auto">
-                <a href="{{ url('status_kesehatan') }}" class="btn btn-xs btn-info pull-left ml-auto">Kembali</a>
-            </div>
+            
           </div>
         </div>
       </div>

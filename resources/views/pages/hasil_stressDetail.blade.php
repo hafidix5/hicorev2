@@ -25,7 +25,7 @@
                         </div>
                       </div>
                   </div>
-                  
+                  </div>
 
               @if(Auth::check()&& Auth::user()->role  == "2")
               <a href="{{ route('downloadHasilKuesioner',$pasien->nama) }}" class="btn btn-success my-3" target="_blank">EXPORT EXCEL</a>

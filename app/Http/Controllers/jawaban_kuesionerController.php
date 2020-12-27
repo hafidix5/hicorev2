@@ -286,11 +286,35 @@ jk.kuesioner_id=k.id WHERE jk.jawaban=k.kunci AND jk.jenis_id=1 and p.id='.auth(
         // dd($response);
 
     }
+    public function riwayatpribadi_admin()
+    {
+        $response = DB::select('
+        SELECT jk.tanggal,p.id,p.nama,p.hp,SUM(jk.jawaban) AS skor FROM pasien AS p JOIN jawaban_kuesioner AS jk ON p.id=jk.pasien_id JOIN kuesioner AS k ON
+jk.kuesioner_id=k.id WHERE jk.jawaban=k.kunci AND jk.jenis_id=1 GROUP BY jk.tanggal,p.id,p.nama,p.hp ORDER BY jk.tanggal desc');
+      // dd($response);
+       
+
+        return view('pages.hasil_pengetahuan', compact('response'));
+        // dd($response);
+
+    }
     public function riwayatpribadi_persepsi()
     {
         $response = DB::select('
         SELECT jk.tanggal,p.id,p.nama,p.hp,SUM(jk.jawaban) AS skor FROM pasien AS p JOIN jawaban_kuesioner AS jk ON p.id=jk.pasien_id JOIN kuesioner AS k ON
 jk.kuesioner_id=k.id WHERE jk.jenis_id=2 and p.id='.auth()->user()->id.' GROUP BY jk.tanggal,p.id,p.nama,p.hp ORDER BY jk.tanggal desc');
+      // dd($response);
+       
+
+        return view('pages.hasil_persepsi', compact('response'));
+        // dd($response);
+
+    }
+    public function riwayatpribadi_persepsi_admin()
+    {
+        $response = DB::select('
+        SELECT jk.tanggal,p.id,p.nama,p.hp,SUM(jk.jawaban) AS skor FROM pasien AS p JOIN jawaban_kuesioner AS jk ON p.id=jk.pasien_id JOIN kuesioner AS k ON
+jk.kuesioner_id=k.id WHERE jk.jenis_id=2 GROUP BY jk.tanggal,p.id,p.nama,p.hp ORDER BY jk.tanggal desc');
       // dd($response);
        
 
@@ -310,12 +334,37 @@ jk.kuesioner_id=k.id WHERE jk.jenis_id=3 and p.id='.auth()->user()->id.' GROUP B
         // dd($response);
 
     }
+    public function riwayatpribadi_stress_admin()
+    {
+        $response = DB::select('
+        SELECT jk.tanggal,p.id,p.nama,p.hp,SUM(jk.jawaban) AS skor FROM pasien AS p JOIN jawaban_kuesioner AS jk ON p.id=jk.pasien_id JOIN kuesioner AS k ON
+jk.kuesioner_id=k.id WHERE jk.jenis_id=3 GROUP BY jk.tanggal,p.id,p.nama,p.hp ORDER BY jk.tanggal desc');
+      // dd($response);
+       
+
+        return view('pages.hasil_stress', compact('response'));
+        // dd($response);
+
+    }
     public function riwayatpribadi_pengendalian()
     {
         $alkohol="alkohol";
         $response = DB::select('
         SELECT jk.tanggal,p.id,p.nama,p.hp,SUM(jk.jawaban) AS skor FROM pasien AS p JOIN jawaban_kuesioner AS jk ON p.id=jk.pasien_id JOIN kuesioner AS k ON
 jk.kuesioner_id=k.id WHERE k.sub_jenis!="'.$alkohol.'" and jk.jenis_id=4 and p.id='.auth()->user()->id.' GROUP BY jk.tanggal,p.id,p.nama,p.hp ORDER BY jk.tanggal desc');
+      // dd($response);
+       
+
+        return view('pages.hasil_pengendalian', compact('response'));
+        // dd($response);
+
+    }
+    public function riwayatpribadi_pengendalian_admin()
+    {
+        $alkohol="alkohol";
+        $response = DB::select('
+        SELECT jk.tanggal,p.id,p.nama,p.hp,SUM(jk.jawaban) AS skor FROM pasien AS p JOIN jawaban_kuesioner AS jk ON p.id=jk.pasien_id JOIN kuesioner AS k ON
+jk.kuesioner_id=k.id WHERE k.sub_jenis!="'.$alkohol.'" and jk.jenis_id=4 GROUP BY jk.tanggal,p.id,p.nama,p.hp ORDER BY jk.tanggal desc');
       // dd($response);
        
 
@@ -610,7 +659,7 @@ AND jk.jawaban=k.kunci AND k.id>=51 AND k.id<=60 limit 1
     {
         $response=DB::select('
         SELECT k.id as id,k.pertanyaan as pertanyaan from jawaban_kuesioner AS jk join kuesioner AS k ON
-jk.kuesioner_id=k.id WHEREjk.jenis_id=2 AND jk.pasien_id='.$id.' and jk.tanggal="'.$tanggal.'"
+jk.kuesioner_id=k.id WHERE jk.jenis_id=2 AND jk.pasien_id='.$id.' and jk.tanggal="'.$tanggal.'"
 ORDER BY k.id asc
         ');
 

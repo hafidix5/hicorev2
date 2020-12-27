@@ -29,7 +29,10 @@
                       <th>
                         Tanggal Pengisian
                       </th>
-                                         <th>
+                      <th>
+                        Nama
+                      </th>
+                      <th>
                         Aksi
                     </th>
                     </thead>
@@ -37,6 +40,7 @@
                         @foreach ($hasil_kesehatan as $hasil_kesehatan)
                         <tr >
                             <td>{{ $hasil_kesehatan->tgl_mengisi }}</td>
+                            <td>{{ $hasil_kesehatan->nama }}</td>
                             <th>
                                <a class="nav-link" href="{{ route('status_kesehatan.show',$hasil_kesehatan->id) }}">
                                <i class="material-icons">visibility</i> Lihat

@@ -159,9 +159,6 @@
                 <button type="submit" class="btn btn-primary">{{ __('Simpan') }}</button>
               </div> --}}
 
-                <div class="card-footer ml-auto mr-auto">
-                    <a href="{{ url('status_kesehatan') }}" class="btn btn-xs btn-info pull-left ml-auto">Kembali</a>
-                </div>
 
             </div>
           </form>

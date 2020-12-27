@@ -17,7 +17,7 @@
                 @if($data == null)
                 <div class="row">
                     <label class="col-sm-2 col-form-label" for="input-current-password">{{ __('Pesan') }}</label>
-                    <div class="col-sm-7">
+                    <div >
                       <div class="form-group">
                         <textarea class="form-control" type="text" name="pesan" placeholder="{{ __('Pesan') }}"  required ></textarea>
                     </div>
@@ -43,7 +43,7 @@
                 @else
                 <div class="row">
                   <label class="col-sm-2 col-form-label" for="input-current-password">{{ __('Pesan') }}</label>
-                  <div class="col-sm-7">
+                  <div >
                     <div class="form-group">
                       <input class="form-control"  value="{{ $data->pesan }}" type="text" name="pesan" placeholder="{{ __('Pesan') }}"  required ></input>
                     </div>
@@ -62,7 +62,7 @@
 
                 <div class="row">
                     <label class="col-sm-2 col-form-label" for="input-current-password">{{ __('API') }}</label>
-                    <div class="col-sm-7">
+                    <div >
                       <div class="form-group">
                         <input class="form-control" value="{{ $data->api }}" type="text" name="api" placeholder="{{ __('XXSJENSWOW') }}"  required ></input>
                       </div>

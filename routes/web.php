@@ -43,11 +43,16 @@ Route::group(['middleware' => 'auth'], function () {
     Route::get('riwayat_persepsi', 'jawaban_kuesionerController@riwayatpribadi_persepsi')->name('riwayat_persepsi');
     Route::get('riwayat_stress', 'jawaban_kuesionerController@riwayatpribadi_stress')->name('riwayat_stress');
     Route::get('riwayat_pengendalian', 'jawaban_kuesionerController@riwayatpribadi_pengendalian')->name('riwayat_pengendalian');
+    Route::get('riwayat_admin', 'jawaban_kuesionerController@riwayatpribadi_admin')->name('riwayat_admin');
+    Route::get('riwayat_persepsi_admin', 'jawaban_kuesionerController@riwayatpribadi_persepsi_admin')->name('riwayat_persepsi_admin');
+    Route::get('riwayat_stress_admin', 'jawaban_kuesionerController@riwayatpribadi_stress_admin')->name('riwayat_stress_admin');
+    Route::get('riwayat_pengendalian_admin', 'jawaban_kuesionerController@riwayatpribadi_pengendalian_admin')->name('riwayat_pengendalian_admin');
     Route::get('isi_persepsi', 'KuesionerController@index')->name('isi_persepsi');
     Route::get('isi_pengetahuan', 'KuesionerController@indexpengetahuan')->name('isi_pengetahuan');
     Route::get('isi_stress', 'KuesionerController@indexstress')->name('isi_stress');
     Route::get('isi_pengendalian', 'KuesionerController@indexpengendalian')->name('isi_pengendalian');
     Route::get('status_kesehatan', 'status_kesehatanController@index')->name('status_kesehatan');
+    Route::get('status_kesehatan_admin', 'status_kesehatanController@index_admin')->name('status_kesehatan_admin');
     Route::get('/riwayat/downloadHasilKuesioner/{id}','KuesionerController@export_excel')->name('downloadHasilKuesioner');
     Route::post('isi_persepsiSave', 'jawaban_kuesionerController@store')->name('isi_persepsiSave');
     Route::post('isi_pengetahuanSave', 'jawaban_kuesionerController@storepengetahuan')->name('isi_pengetahuanSave');
@@ -66,6 +71,42 @@ Route::group(['middleware' => 'auth'], function () {
     Route::get('pendidikanKesehatan', 'edukasi_videoController@index')->name('pendidikanKesehatan');
 
     Route::get('video_pengetahuan', 'jenisController@video_pengetahuan')->name('video_pengetahuan');
+    Route::get('video_persepsi', 'jenisController@video_persepsi')->name('video_persepsi');
+    Route::get('video_stress', 'jenisController@video_stress')->name('video_stress');
+    Route::get('video_pengendalian', 'jenisController@video_pengendalian')->name('video_pengendalian');
+
+    Route::get('video_pengetahuan_admin', 'jenisController@video_pengetahuan_admin')->name('video_pengetahuan_admin');
+    Route::get('video_pengetahuan.hapus', 'jenisController@video_pengetahuan_hapus')->name('video_pengetahuan.hapus');
+    Route::get('video_pengetahuan.edit/{id}', 'jenisController@video_pengetahuan_edit')->name('video_pengetahuan.edit');
+    Route::get('video_pengetahuan.insert', 'jenisController@video_pengetahuan_insert')->name('video_pengetahuan.insert');
+    Route::post('video_pengetahuan.store', 'jenisController@video_pengetahuan_store')->name('video_pengetahuan.store');
+    Route::get('video_pengetahuan.destroy/{id}', 'jenisController@video_pengetahuan_destroy')->name('video_pengetahuan.destroy');
+    Route::put('video_pengetahuan.update/{id}', ['as' => 'video_pengetahuan.update', 'uses' => 'jenisController@video_pengetahuan_update']);
+
+    Route::get('video_persepsi_admin', 'jenisController@video_persepsi_admin')->name('video_persepsi_admin');
+    Route::get('video_persepsi.hapus', 'jenisController@video_persepsi_hapus')->name('video_persepsi.hapus');
+    Route::get('video_persepsi.edit/{id}', 'jenisController@video_persepsi_edit')->name('video_persepsi.edit');
+    Route::get('video_persepsi.insert', 'jenisController@video_persepsi_insert')->name('video_persepsi.insert');
+    Route::post('video_persepsi.store', 'jenisController@video_persepsi_store')->name('video_persepsi.store');
+    Route::get('video_persepsi.destroy/{id}', 'jenisController@video_persepsi_destroy')->name('video_persepsi.destroy');
+    Route::put('video_persepsi.update/{id}', ['as' => 'video_persepsi.update', 'uses' => 'jenisController@video_persepsi_update']);
+
+    Route::get('video_stress_admin', 'jenisController@video_stress_admin')->name('video_stress_admin');
+    Route::get('video_stress.hapus', 'jenisController@video_stress_hapus')->name('video_stress.hapus');
+    Route::get('video_stress.edit/{id}', 'jenisController@video_stress_edit')->name('video_stress.edit');
+    Route::get('video_stress.insert', 'jenisController@video_stress_insert')->name('video_stress.insert');
+    Route::post('video_stress.store', 'jenisController@video_stress_store')->name('video_stress.store');
+    Route::get('video_stress.destroy/{id}', 'jenisController@video_stress_destroy')->name('video_stress.destroy');
+    Route::put('video_stress.update/{id}', ['as' => 'video_stress.update', 'uses' => 'jenisController@video_stress_update']);
+
+    Route::get('video_pengendalian_admin', 'jenisController@video_pengendalian_admin')->name('video_pengendalian_admin');
+    Route::get('video_pengendalian.hapus', 'jenisController@video_pengendalian_hapus')->name('video_pengendalian.hapus');
+    Route::get('video_pengendalian.edit/{id}', 'jenisController@video_pengendalian_edit')->name('video_pengendalian.edit');
+    Route::get('video_pengendalian.insert', 'jenisController@video_pengendalian_insert')->name('video_pengendalian.insert');
+    Route::post('video_pengendalian.store', 'jenisController@video_pengendalian_store')->name('video_pengendalian.store');
+    Route::get('video_pengendalian.destroy/{id}', 'jenisController@video_pengendalian_destroy')->name('video_pengendalian.destroy');
+    Route::put('video_pengendalian.update/{id}', ['as' => 'video_pengendalian.update', 'uses' => 'jenisController@video_pengendalian_update']);
+
     Route::get('video_persepsi', 'jenisController@video_persepsi')->name('video_persepsi');
     Route::get('video_stress', 'jenisController@video_stress')->name('video_stress');
     Route::get('video_pengendalian', 'jenisController@video_pengendalian')->name('video_pengendalian');
