@@ -8,7 +8,7 @@
       <div class="container-fluid">
     <div class="card">
       <div class="card-header card-header-primary">
-        <h4 class="card-title">Pertanyaan Pengetahuan</h4>
+        <h4 class="card-title">Pertanyaan Persepsi</h4>
       </div>
         <div class="col-md-12">
 
@@ -34,9 +34,6 @@
                       <th>
                         Pertanyaan
                       </th>
-                      <th>
-                        Kunci
-                      </th>
 
                     <th>
                         Aksi
@@ -45,21 +42,16 @@
                     </thead>
                     <tbody>
                     <?php $no=1; ?>
-                        @foreach ($pertanyaan_pengetahuan as $pertanyaan_pengetahuan)
+                        @foreach ($pertanyaan_persepsi as $pertanyaan_persepsi)
                         <tr>
                             <td>{{ $no++ }}</td>
-                            <td>{{ $pertanyaan_pengetahuan->pertanyaan }}</td>
-                            @if($pertanyaan_pengetahuan->kunci==1)
-                            <td>Benar</td>
-                            @else
-                            <td>Salah</td>
-                            @endif
+                            <td>{{ $pertanyaan_persepsi->pertanyaan }}</td>
 
                             <td>
-                                <a class="nav-link" href="{{ route('pertanyaan_pengetahuan.edit',$pertanyaan_pengetahuan->id) }}">
+                                <a class="nav-link" href="{{ route('pertanyaan_persepsi.edit',$pertanyaan_persepsi->id) }}">
                                     <i class="material-icons">edit</i> Edit
                                   </a>
-                                   <a class="nav-link" href="{{ route('pertanyaan_pengetahuan.hapus',$pertanyaan_pengetahuan->id) }}">
+                                   <a class="nav-link" href="{{ route('pertanyaan_persepsi.hapus',$pertanyaan_persepsi->id) }}">
                                     <i class="material-icons">remove_circle</i> Hapus
                                   </a>
                             </td>
@@ -79,7 +71,7 @@
             </div>
             <div class="row">
                 <div class="col-lg-12">
-                    <a href="{{ url('pertanyaan_pengetahuan.insert') }}" class="btn btn-xs btn-info pull-left ml-auto">Tambah</a>
+                    <a href="{{ url('pertanyaan_persepsi.insert') }}" class="btn btn-xs btn-info pull-left ml-auto">Tambah</a>
                 </div>
             </div>
 

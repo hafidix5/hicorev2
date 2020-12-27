@@ -77,6 +77,26 @@ Route::group(['middleware' => 'auth'], function () {
         Route::put('pertanyaan_pengetahuan.update/{id}', ['as' => 'pertanyaan_pengetahuan.update', 'uses' => 'kuesionerController@updatePengetahuan']);
         Route::get('pertanyaan_pengetahuan.hapus/{id}', ['as' => 'pertanyaan_pengetahuan.hapus', 'uses' => 'kuesionerController@destroyPengetahuan']);
     
+        Route::get('pertanyaan_persepsi', 'kuesionerController@showpersepsi')->name('pertanyaan_persepsi');
+        Route::get('pertanyaan_persepsi.insert', 'kuesionerController@insertpersepsi')->name('pertanyaan_persepsi.insert');
+        Route::post('pertanyaan_persepsi.store', ['as' => 'pertanyaan_persepsi.store', 'uses' => 'kuesionerController@storepersepsi']);
+        Route::get('pertanyaan_persepsi.edit/{id}', ['as' => 'pertanyaan_persepsi.edit', 'uses' => 'kuesionerController@editpersepsi']);
+        Route::put('pertanyaan_persepsi.update/{id}', ['as' => 'pertanyaan_persepsi.update', 'uses' => 'kuesionerController@updatepersepsi']);
+        Route::get('pertanyaan_persepsi.hapus/{id}', ['as' => 'pertanyaan_persepsi.hapus', 'uses' => 'kuesionerController@destroypersepsi']);
+
+        Route::get('pertanyaan_stress', 'kuesionerController@showstress')->name('pertanyaan_stress');
+        Route::get('pertanyaan_stress.insert', 'kuesionerController@insertstress')->name('pertanyaan_stress.insert');
+        Route::post('pertanyaan_stress.store', ['as' => 'pertanyaan_stress.store', 'uses' => 'kuesionerController@storestress']);
+        Route::get('pertanyaan_stress.edit/{id}', ['as' => 'pertanyaan_stress.edit', 'uses' => 'kuesionerController@editstress']);
+        Route::put('pertanyaan_stress.update/{id}', ['as' => 'pertanyaan_stress.update', 'uses' => 'kuesionerController@updatestress']);
+        Route::get('pertanyaan_stress.hapus/{id}', ['as' => 'pertanyaan_stress.hapus', 'uses' => 'kuesionerController@destroystress']);
+
+        Route::get('pertanyaan_pengendalian', 'kuesionerController@showpengendalian')->name('pertanyaan_pengendalian');
+        Route::get('pertanyaan_pengendalian.insert', 'kuesionerController@insertpengendalian')->name('pertanyaan_pengendalian.insert');
+        Route::post('pertanyaan_pengendalian.store', ['as' => 'pertanyaan_pengendalian.store', 'uses' => 'kuesionerController@storepengendalian']);
+        Route::get('pertanyaan_pengendalian.edit/{id}', ['as' => 'pertanyaan_pengendalian.edit', 'uses' => 'kuesionerController@editpengendalian']);
+        Route::put('pertanyaan_pengendalian.update/{id}', ['as' => 'pertanyaan_pengendalian.update', 'uses' => 'kuesionerController@updatepengendalian']);
+        Route::get('pertanyaan_pengendalian.hapus/{id}', ['as' => 'pertanyaan_pengendalian.hapus', 'uses' => 'kuesionerController@destroypengendalian']);
 
         Route::get('dataDiri', 'PasienController@index')->name('dataDiri');
 

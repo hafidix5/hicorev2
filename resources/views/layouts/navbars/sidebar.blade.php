@@ -170,7 +170,7 @@
                     </a>
                 <ul class="collapse list-unstyled" id="persepsi">
                     <li class="nav-link">
-                        <a  href="{{ route('isi_persepsi') }}">Daftar Pertanyaan</a>
+                        <a  href="{{ route('pertanyaan_persepsi') }}">Daftar Pertanyaan</a>
                     </li>
                     <li class="nav-link">
                       <a  href="{{ route('riwayat_persepsi') }}">Hasil kuesioner</a>
@@ -187,7 +187,7 @@
                     </a>
                 <ul class="collapse list-unstyled" id="stress">
                     <li class="nav-link">
-                        <a  href="{{ route('isi_stress') }}">Daftar Pertanyaan</a>
+                        <a  href="{{ route('pertanyaan_stress') }}">Daftar Pertanyaan</a>
                     </li>
                     <li class="nav-link">
                       <a  href="{{ route('riwayat_stress') }}">Hasil kuesioner</a>
@@ -219,7 +219,7 @@
                     </a>
                 <ul class="collapse list-unstyled" id="hipertensi">
                     <li class="nav-link">
-                        <a  href="{{ route('isi_pengendalian') }}">Daftar Pertanyaan</a>
+                        <a  href="{{ route('pertanyaan_pengendalian') }}">Daftar Pertanyaan</a>
                     </li>
                     <li class="nav-link">
                       <a  href="{{ route('riwayat_pengendalian') }}">Hasil kuesioner</a>

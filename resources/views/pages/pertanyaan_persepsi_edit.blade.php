@@ -5,7 +5,7 @@
     <div class="container-fluid">
       <div class="row">
         <div class="col-md-12">
-          <form method="post" action="{{ route('pertanyaan_pengetahuan.update',$pertanyaan_pengetahuan->id ) }}" autocomplete="off" class="form-horizontal">
+          <form method="post" action="{{ route('pertanyaan_persepsi.update',$pertanyaan_persepsi->id ) }}" autocomplete="off" class="form-horizontal">
             @csrf
             @method('PUT')
 
@@ -31,25 +31,13 @@
                   <label class="col-sm-2 col-form-label">{{ __('Pertanyaan') }}</label>
                   <div class="col-sm-7">
                     <div class="form-group{{ $errors->has('pertanyaan') ? ' has-danger' : '' }}">
-                    <input class="form-control{{ $errors->has('pertanyaan') ? ' is-invalid' : '' }}" name="pertanyaan" id="input-pertanyaan" type="text" placeholder="{{ __('pertanyaan') }}" value="{{$pertanyaan_pengetahuan->pertanyaan}}" required="true" aria-required="true"/>
+                    <input class="form-control{{ $errors->has('pertanyaan') ? ' is-invalid' : '' }}" name="pertanyaan" id="input-pertanyaan" type="text" placeholder="{{ __('pertanyaan') }}" value="{{$pertanyaan_persepsi->pertanyaan}}" required="true" aria-required="true"/>
                       @if ($errors->has('pertanyaan'))
                         <span id="pertanyaan-error" class="error text-danger" for="input-pertanyaan">{{ $errors->first('pertanyaan') }}</span>
                       @endif
                     </div>
                   </div>
                 </div>
-                <div class="row">
-                    <label class="col-sm-2 col-form-label">{{ __('Kunci') }}</label>
-                    <div class="col-sm-7">
-                      <div class="form-group{{ $errors->has('kunci') ? ' has-danger' : '' }}">
-                        <select class="form-control" class="form-control" name="kunci" id="kunci">
-                        <option value="1">Benar</option>                            
-                           <option value="0">Salah</option>                           
-                          </select>
-                      
-                      </div>
-                    </div>
-                  </div>
                 
 
 

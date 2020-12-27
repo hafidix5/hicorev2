@@ -5,7 +5,7 @@
     <div class="container-fluid">
       <div class="row">
         <div class="col-md-12">
-          <form method="post" action="{{ route('pertanyaan_pengetahuan.store') }}" autocomplete="off" class="form-horizontal">
+          <form method="post" action="{{ route('pertanyaan_pengendalian.store') }}" autocomplete="off" class="form-horizontal">
             @csrf
             @method('post')
 
@@ -40,7 +40,7 @@
                 <div class="row">                 
                   <div class="col-sm-7">
                     <div class="form-group{{ $errors->has('jenis_id') ? ' has-danger' : '' }}">
-                      <input class="form-control{{ $errors->has('jenis_id') ? ' is-invalid' : '' }}" name="jenis_id" id="input-jenis_id" type="number" placeholder="{{ __('') }}" value="1" required="true" aria-required="true" hidden/>
+                      <input class="form-control{{ $errors->has('jenis_id') ? ' is-invalid' : '' }}" name="jenis_id" id="input-jenis_id" type="number" placeholder="{{ __('') }}" value="4" required="true" aria-required="true" hidden/>
                       @if ($errors->has('jenis_id'))
                         <span id="jenis_id-error" class="error text-danger" for="input-jenis_id">{{ $errors->first('jenis_id') }}</span>
                       @endif
@@ -48,12 +48,17 @@
                   </div>
                 </div>
                 <div class="row">
-                    <label class="col-sm-2 col-form-label">{{ __('Kunci') }}</label>
+                    <label class="col-sm-2 col-form-label">{{ __('Jenis Pengendalian') }}</label>
                     <div class="col-sm-7">
-                      <div class="form-group{{ $errors->has('kunci') ? ' has-danger' : '' }}">
-                        <select class="form-control" class="form-control" name="kunci" id="kunci">
-                        <option value="1">Benar</option>                            
-                           <option value="0">Salah</option>                           
+                      <div class="form-group{{ $errors->has('jenis_pengendalian') ? ' has-danger' : '' }}">
+                        <select class="form-control" class="form-control" name="jenis_pengendalian" id="jenis_pengendalian">
+                        <option value="obat-obatan">Obat-obatan</option>                            
+                           <option value="diet">Diet</option>
+                           <option value="aktivitas_fisik">Aktivitas Fisik</option>
+                           <option value="merokok">Merokok</option>
+                           <option value="manajemen_bb">Manajemen Berat Badan</option>
+                           <option value="minum_alkohol">Minum Alkohol</option>
+                           <option value="alkohol">Alkohol</option>
                           </select>
                       
                       </div>
