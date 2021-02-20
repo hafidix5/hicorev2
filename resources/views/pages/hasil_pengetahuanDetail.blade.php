@@ -18,9 +18,7 @@
                         <h5 class="card-header">Pengetahuan Pasien Hipertensi</h5>
                         <div class="card-body ">
                             <a href="#" class="btn btn-primary disabled">
-                                @foreach ($pengetahuan as $skor)
-                                {{ $skor->pengetahuan }}
-                                @endforeach
+                                {{$skor}}
                                 </a>
                         </div>
                       </div>

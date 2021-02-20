@@ -33,6 +33,9 @@
                         Nama
                       </th>
                       <th>
+                        Jumlah Login
+                      </th>
+                      <th>
                         Aksi
                     </th>
                     </thead>
@@ -41,11 +44,13 @@
                         <tr >
                             <td>{{ $hasil_kesehatan->tgl_mengisi }}</td>
                             <td>{{ $hasil_kesehatan->nama }}</td>
+                            <td>{{ $hasil_kesehatan->login }}</td>
                             <th>
-                               <a class="nav-link" href="{{ route('status_kesehatan.show',$hasil_kesehatan->id) }}">
+                               <a class="nav-link" href="{{ route('status_kesehatan.show',['id'=>$hasil_kesehatan->id])}}">
                                <i class="material-icons">visibility</i> Lihat
                                   </a>
-                                  <a class="nav-link" href="{{ route('status_kesehatan.hasil',[$hasil_kesehatan->tgl_mengisi,$hasil_kesehatan->pasien_id,]) }}">
+                                  
+                                  <a class="nav-link" href="{{ route('status_kesehatan.hasil',[$hasil_kesehatan->tgl_mengisi,$hasil_kesehatan->pasien_id]) }}">
                                     <i class="material-icons">verified_user </i> Hasil
                                   </a>
 

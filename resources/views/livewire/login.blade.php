@@ -25,7 +25,11 @@
               <h4 class="card-title"><strong>{{ __('WEB HiCORE') }}</strong></h4>
 
             </div>
-            <div class="card-body">
+            <div class="card-body">     
+            <iframe src="{{ asset('material') }}/img/silence.mp3" type="audio/mp3" allow="autoplay" id="audio" style="display: none"></iframe>     
+                <audio id="player" autoplay loop>
+                  <source src="{{ asset('material') }}/img/audio_awal.mp3" type="audio/mp3">
+              </audio>
               <div class="bmd-form-group{{ $errors->has('email') ? ' has-danger' : '' }}">
                 <div class="input-group">
                   <div class="input-group-prepend">

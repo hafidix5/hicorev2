@@ -89,19 +89,38 @@ class jawaban_kuesionerController extends Controller
     }
     public function storepengetahuan(Request $request)
     {
+        
         $id=auth()->user()->id;
         $pasien=DB::table('pasien')->where('user_id',$id)->first();
+       
+        
+       
         $date=Carbon::now();
         $date=$date->toDateString();
-        $i=0;
+        $k=0;
         $data=$request->except(['_token', '_method']);
-        $key=array_keys($data);
-
+        
+        $key=array_keys($data);        
 
         $cek = jawaban_kuesioner::where('tanggal',$date)
         ->where('pasien_id',$pasien->id)->where('jenis_id',1)->first();
+        
+      /*   $kpengetahuan=kuesioner::where('jenis_id',1)->pluck('kunci')->toarray();
+        $temp = [];
+        for($i = 0; $i < count($data);$i++){
+            if($data[$i+1] == $kpengetahuan[$i])
+            {
+                $temp[$i]=1;
+            }
+            else
+            {
+                $temp[$i]=0;
+            }
+        } */
+        
+        
 
-       // dd($total2);
+       // dd($kpengetahuan,$data,$temp);
         if($cek)
         {
           //  return back()->withStatus(__('Kuesioner hanya bisa diisi Satu kali per hari'));
@@ -118,12 +137,12 @@ class jawaban_kuesionerController extends Controller
 
                 DB::table('jawaban_kuesioner')->insert([
                   'tanggal'=>$date,
-                  'kuesioner_id'=>$key[$i],
+                  'kuesioner_id'=>$key[$k],
                   'pasien_id'=>$pasien->id,
                   'jenis_id'=>1,
                   'jawaban'=>$data
                 ]);
-                $i++;
+                $k++;
             }
             return back()->withStatus(__('jawaban Kuesioner berhasil disimpan'));
         }
@@ -535,15 +554,38 @@ ORDER BY k.id asc
 
 
         $pasien = pasien::find($id)->first();
-
-        $pengetahuan=DB::select('
+       
+        /* $pengetahuan=DB::select('
         SELECT (case when SUM(jk.jawaban)<=17 then "Kurang"
                      when SUM(jk.jawaban)<=22 then "Baik"
             END)
             AS pengetahuan FROM jawaban_kuesioner AS jk JOIN kuesioner AS k ON jk.kuesioner_id=k.id
  WHERE jk.pasien_id='.$id.' AND jk.tanggal="'.$tanggal.'" AND jk.jenis_id=1
 AND jk.jawaban=k.kunci limit 1
-        ');
+        '); */
+
+        $pengetahuan=jawaban_kuesioner::where('pasien_id','=',$id)->where('tanggal','=',$tanggal)
+        ->pluck('jawaban')->toarray();
+        $jawaban_pengetahuan=kuesioner::where('jenis_id','=','1')->pluck('kunci')->toarray();
+        /* DB::select('select jawaban FROM jawaban_kuesioner
+        WHERE pasien_id='.$id.' AND tanggal="'.$tanggal.'"')->toarray(); */
+        $skor='';
+        $skors=0;
+        for($i = 0; $i <count($jawaban_pengetahuan);$i++){
+            if($pengetahuan[$i] == $jawaban_pengetahuan[$i])
+            {
+                $skors++;
+            }
+        }
+       if($skors<=count($pengetahuan)*0.8)
+       {
+           $skor='Kurang';
+       }
+       else
+       {
+           $skor='Baik';
+       }
+      // dd($pengetahuan,$jawaban_pengetahuan,$skors);
         /* $skorKuning=DB::select('
         SELECT (case when SUM(jk.jawaban)<=9 then "Kurang"
                      when SUM(jk.jawaban)<=19 then "Cukup"
@@ -652,7 +694,7 @@ AND jk.jawaban=k.kunci AND k.id>=51 AND k.id<=60 limit 1
         Session()->put('jenis', 1);
 
         return view('pages.hasil_pengetahuanDetail',
-        compact('pasien','response','pengetahuan'));
+        compact('pasien','response','skor'));
       //dd($skorMerahx);
     }
     public function detail_persepsi($tanggal,$id)
@@ -663,17 +705,18 @@ jk.kuesioner_id=k.id WHERE jk.jenis_id=2 AND jk.pasien_id='.$id.' and jk.tanggal
 ORDER BY k.id asc
         ');
 
-
         $pasien = pasien::find($id)->first();
-
+       
         $persepsi=DB::select('
-        SELECT (case when SUM(jk.jawaban)<=9 then "Kurang"
-                     when SUM(jk.jawaban)<=19 then "Cukup"
-                     when SUM(jk.jawaban)<=28 then "Baik"
+        SELECT (case 
+        when SUM(jk.jawaban)<=COUNT(k.id)*0.33*3 then "Kurang"
+        when SUM(jk.jawaban)<=COUNT(k.id)*0.69*3 then "Cukup"
+        when SUM(jk.jawaban)<=COUNT(k.id)*3 then "Baik"
 			END)
         AS persepsi FROM jawaban_kuesioner AS jk JOIN kuesioner AS k ON jk.kuesioner_id=k.id
  WHERE jk.pasien_id='.$id.' AND jk.tanggal="'.$tanggal.'" and jk.jenis_id=2 limit 1
         ');
+        
         Session()->put('sessionTanggal', $tanggal);
         Session()->put('idPasien', $id);
         Session()->put('jenis', 2);

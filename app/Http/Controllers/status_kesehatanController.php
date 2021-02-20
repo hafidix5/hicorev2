@@ -19,9 +19,12 @@ class status_kesehatanController extends Controller
     {
         $id=auth()->user()->id;
         $pasien=DB::table('pasien')->where('user_id',$id)->first();
-        $hasil_kesehatan=DB::table('status_kesehatan')->where('pasien_id',$pasien->id)
+        $hasil_kesehatan=DB::table('status_kesehatan')
+        ->join('pasien','status_kesehatan.pasien_id','=','pasien.id')
+        ->join('users','pasien.user_id','users.id')
+        ->where('pasien_id',$pasien->id)
         ->OrderBy('tgl_mengisi','DESC')
-        ->select ('tgl_mengisi','id','pasien_id')
+        ->select ('tgl_mengisi','nama','status_kesehatan.id','pasien_id','login')
         ->get();
         //dd($hasil_kesehatan);
         return view('pages.status_kesehatanIndex', ['hasil_kesehatan'=>$hasil_kesehatan]);
@@ -30,10 +33,11 @@ class status_kesehatanController extends Controller
     {        
         
         $hasil_kesehatan=DB::table('status_kesehatan')
-        ->rightjoin('pasien','status_kesehatan.pasien_id','=','pasien.id')
+        ->join('pasien','status_kesehatan.pasien_id','=','pasien.id')
+        ->join('users','pasien.user_id','users.id')
         ->OrderBy('tgl_mengisi','DESC')
-        ->select ('tgl_mengisi','status_kesehatan.id','pasien_id','nama')
-        ->groupby('tgl_mengisi','status_kesehatan.id','pasien_id','nama')
+        ->select ('login','tgl_mengisi','status_kesehatan.id','pasien_id','nama')
+        ->groupby('login','tgl_mengisi','status_kesehatan.id','pasien_id','nama')
         ->get();
        // dd($hasil_kesehatan);
         return view('pages.status_kesehatanIndex', ['hasil_kesehatan'=>$hasil_kesehatan]);
@@ -109,13 +113,18 @@ class status_kesehatanController extends Controller
     {
         $tekanandarah=DB::select('
         SELECT (case when  sistol<120 AND diastol<80 then "Normal"
-            when  sistol<=139 OR diastol<=89 then "PreHipertensi"
-            when  sistol<=159 OR diastol<=99 then "Hipertensi Derajat I"
-            when  sistol>=160 OR diastol>=100 then "Hipertensi Derajat II"
-            when  sistol>180 OR diastol>120 then "Hipertensi Krisis"
+            when  sistol<120 OR diastol<=89 then "PreHipertensi"
+            when  sistol<120 OR diastol<=99 then "Hipertensi Derajat I"
+            when  sistol<120 OR diastol>=100 then "Hipertensi Derajat II"
+            when  sistol<120 OR diastol>120 then "Hipertensi Krisis"
+            when  sistol<=139 then "PreHipertensi"
+            when  sistol<=159 then "Hipertensi Derajat I"
+            when  sistol>=160 then "Hipertensi Derajat II"
+            when  sistol>180 then "Hipertensi Krisis"
             END)  AS tekanandarah FROM status_kesehatan WHERE pasien_id='.$id.'
             and tgl_mengisi="'.$tgl.'"
         ');
+        
         $imt=DB::select('
         SELECT (case when  berat/((tinggi*0.01)*tinggi*0.01)<17 then "Kurus tingkat berat"
         when  berat/((tinggi*0.01)*tinggi*0.01)<=18.4 then "Kurus tingkat ringan"

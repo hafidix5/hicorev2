@@ -23,9 +23,9 @@
                 <h4 class="card-title">{{ __('Tambah Status Kesehatan') }}</h4>
               </div>
               <div class="card-body ">
-                <iframe src="{{ asset('material') }}/img/silenc.mp3" type="audio/mp3" allow="autoplay" id="audio" style="display: none"></iframe>
-                <audio id="player" autoplay loop>
-                  <source src="{{ asset('material') }}/img/hicor.mp3" type="audio/mp3">
+              <iframe src="{{ asset('material') }}/img/silence.mp3" type="audio/mp3" allow="autoplay" id="audio" style="display: none"></iframe>
+                <audio id="player" autoplay>
+                  <source src="{{ asset('material') }}/img/pemeriksaan_kesh.mp3" type="audio/mp3">
               </audio>
                 @if (session('status'))
                   <div class="row">

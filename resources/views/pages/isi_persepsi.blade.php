@@ -9,8 +9,8 @@
       </div>
 
       <div class="card-body col-sm-10">
-        <iframe src="{{ asset('material') }}/img/silence.mp3" type="audio/mp3" allow="autoplay" id="audio" style="display: none"></iframe>
-        <audio id="player" autoplay loop>
+      <iframe src="{{ asset('material') }}/img/silence.mp3" type="audio/mp3" allow="autoplay" id="audio" style="display: none"></iframe>
+        <audio id="player" autoplay>
           <source src="{{ asset('material') }}/img/hicore.mp3" type="audio/mp3">
       </audio>
         @if (session('status'))
@@ -49,9 +49,9 @@
                     <td>{{ $no++ }}</td>
                     <td>{{ $persepsi->pertanyaan }}</td>
                     <td class="text-left">
-                        <span><input type="radio" id={{ $persepsi->id }} name={{ $persepsi->id }} value="1" required/> Sangat setuju</span><br>
-                        <span><input type="radio" id={{ $persepsi->id }} name={{ $persepsi->id }} value="0"/> Ragu-ragu</span><br/>
-                       <span><input type="radio" id={{ $persepsi->id }} name={{ $persepsi->id }} value="0"/> Tidak setuju</span>
+                        <span><input type="radio" id={{ $persepsi->id }} name={{ $persepsi->id }} value="3" required/> Sangat setuju</span><br>
+                        <span><input type="radio" id={{ $persepsi->id }} name={{ $persepsi->id }} value="2"/> Ragu-ragu</span><br/>
+                       <span><input type="radio" id={{ $persepsi->id }} name={{ $persepsi->id }} value="1"/> Tidak setuju</span>
                    </div>
                     </td>
                 </tr>

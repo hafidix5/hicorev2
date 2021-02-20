@@ -9,9 +9,9 @@
       </div>
 
       <div class="card-body col-sm-10">
-        <iframe src="{{ asset('material') }}/img/silence.mp3" type="audio/mp3" allow="autoplay" id="audio" style="display: none"></iframe>
-        <audio id="player" autoplay loop>
-          <source src="{{ asset('material') }}/img/hicore.mp3" type="audio/mp3">
+      <iframe src="{{ asset('material') }}/img/silence.mp3" type="audio/mp3" allow="autoplay" id="audio" style="display: none"></iframe>
+        <audio id="player" autoplay>
+          <source src="{{ asset('material') }}/img/persepsi.mp3" type="audio/mp3">
       </audio>
         @if (session('status'))
         <div class="row">

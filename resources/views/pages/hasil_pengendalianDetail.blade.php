@@ -170,16 +170,21 @@
                     $rekomendasidmo="Pengaturan Diet Hipertensi dan Manajemen Berat Badan, ";
                 @endphp
               @endif
-              @if (($merokokr="yes")||($minumalkoholr="yes"))
+              @if (($merokokr="yes"))
               @php
-                  $rekomendasima="Pengenalan Bahaya Rokok dan Alkohol Pada Hipertensi, ";
+                  $rekomendasima="Pengenalan Bahaya Rokok Pada Hipertensi, ";
+              @endphp
+            @endif
+            @if (($minumalkoholr="yes"))
+              @php
+                  $rekomendasima2="Pengenalan Alkohol Pada Hipertensi, ";
               @endphp
             @endif
 
               <h4>Rekomendasi :</h4>
-              @if(($obatr!="")|| ($fisikr!="")|| ($rekomendasidmo!="")|| ($rekomendasima!=""))
+              @if(($obatr!="")|| ($fisikr!="")|| ($rekomendasidmo!="")|| ($rekomendasima!="")|| ($rekomendasima2!=""))
               <p>
-                Silahkan bapak ibuk untuk mendengarkan kembali pendidikan kesehatan dengan topik {{$rekomendasidmo}} {{$rekomendasima}}
+                Silahkan bapak ibuk untuk mendengarkan kembali pendidikan kesehatan dengan topik {{$rekomendasidmo}} {{$rekomendasima}} {{$rekomendasima2}}
               </p>
               @endif
               <p>
